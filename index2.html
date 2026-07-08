@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muhammad Rizwan — Oracle APEX Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#F3EFE5;
+  --cream2:#EBE5D6;
+  --paper:#FCFAF4;
+  --ink:#15130F;
+  --ink-soft:#6E6656;
+  --ink-faint:#A39C88;
+  --line:rgba(21,19,15,0.12);
+  --line2:rgba(21,19,15,0.07);
+  --green:#1DBF73;
+  --green-deep:#12653F;
+  --green-dim:rgba(29,191,115,0.13);
+  --dark:#15130F;
+  --dark2:#1E1B14;
+  --r-lg:32px;
+  --r-md:20px;
+  --r-sm:12px;
+  --r-pill:999px;
+  --mono:'JetBrains Mono',monospace;
+  --display:'Space Grotesk',sans-serif;
+  --body:'Inter',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--cream);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;overflow-x:hidden}
+a{color:inherit}
+::selection{background:var(--green);color:#fff}
+
+/* faint grid texture */
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(21,19,15,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(21,19,15,0.025) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;z-index:0}
+
+/* ============ NAV ============ */
+.nav-wrap{position:fixed;top:1.25rem;left:0;right:0;z-index:200;display:flex;justify-content:center;padding:0 1.5rem}
+.nav-pill{display:flex;align-items:center;gap:0.9rem;background:var(--dark);border-radius:var(--r-pill);padding:0.5rem 0.55rem 0.5rem 1.15rem;border:1px solid rgba(255,255,255,0.08);animation:navIn 0.7s ease both}
+@keyframes navIn{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+.nav-name{font-family:var(--display);font-size:0.88rem;font-weight:600;color:#fff;white-space:nowrap}
+.nav-dot{width:7px;height:7px;border-radius:50%;background:var(--green);display:inline-block;margin-right:0.55rem;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.75)}}
+.nav-toggle{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.1);border:none;cursor:pointer;color:#fff;transition:background 0.2s}
+.nav-toggle:hover{background:var(--green)}
+.nav-toggle svg{width:15px;height:15px}
+.nav-drop{position:fixed;top:4.6rem;left:50%;transform:translateX(-50%) translateY(-8px);z-index:199;background:var(--dark);border-radius:var(--r-md);padding:0.9rem;display:flex;flex-direction:column;gap:0.2rem;min-width:230px;border:1px solid rgba(255,255,255,0.08);opacity:0;pointer-events:none;transition:opacity 0.25s ease,transform 0.25s ease}
+.nav-drop.open{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.nav-drop a{font-family:var(--display);font-size:0.92rem;font-weight:500;color:rgba(255,255,255,0.75);text-decoration:none;padding:0.65rem 0.75rem;border-radius:10px;transition:background 0.2s,color 0.2s}
+.nav-drop a:hover{background:rgba(255,255,255,0.07);color:#fff}
+.nav-drop .drop-hire{margin-top:0.35rem;background:var(--green);color:#08150E;text-align:center;font-weight:700}
+.nav-drop .drop-hire:hover{background:#22d17f}
+
+/* ============ HERO ============ */
+.hero{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:8.5rem 2.5rem 3rem;text-align:center}
+.hero-headline{font-family:var(--display);font-weight:700;letter-spacing:-0.04em;line-height:0.94;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:0.1em}
+.hero-headline .row{display:flex;align-items:center;justify-content:center;gap:1.4rem;font-size:clamp(3.1rem,9vw,7.2rem);opacity:0;animation:fadeUp 0.75s ease both}
+.hero-headline .row:nth-child(1){animation-delay:0.28s}
+.hero-headline .row:nth-child(2){animation-delay:0.42s}
+.hero-headline .accent{color:var(--green)}
+.hero-spark{width:0.42em;min-width:26px;color:var(--green);flex-shrink:0}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.hero-meta{display:grid;grid-template-columns:1fr 320px 1fr;align-items:center;max-width:1180px;margin:2.2rem auto 0;font-family:var(--mono);font-size:0.72rem;color:var(--ink-soft);letter-spacing:0.02em;opacity:0;animation:fadeUp 0.7s 0.6s ease both;user-select:none}
+.hero-meta>span:first-child{text-align:left}
+.hero-meta>span:last-child{text-align:right}
+.hero-tw{font-family:var(--mono);font-weight:600;font-size:0.92rem;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;gap:0.35rem;width:320px;white-space:nowrap;overflow:hidden;text-overflow:clip}
+.cursor{display:inline-block;width:1.5px;height:1em;background:var(--green);animation:blink 1s step-end infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.hero-stats{max-width:1180px;margin:3.5rem auto 0;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);opacity:0;animation:fadeUp 0.7s 0.75s ease both}
+.stat-item{padding:1.5rem 0.5rem;text-align:center;border-right:1px solid var(--line)}
+.stat-item:last-child{border-right:none}
+.stat-number{font-family:var(--display);font-size:2.1rem;font-weight:700;line-height:1}
+.stat-number span{color:var(--green)}
+.stat-label{font-family:var(--mono);font-size:0.63rem;color:var(--ink-soft);letter-spacing:0.1em;text-transform:uppercase;margin-top:0.4rem}
+
+/* ============ HEY / INTRO ============ */
+section{position:relative;z-index:1;padding: 4rem 2.5rem}
+.section-inner{max-width:1180px;margin:0 auto}
+.hey-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:2.5rem}
+.hey-title{font-family:var(--display);font-size:clamp(2.2rem,5vw,3.4rem);font-weight:700;letter-spacing:-0.03em}
+.social-row{display:flex;gap:0.6rem}
+.social-row a{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--ink);transition:background 0.2s,border-color 0.2s,color 0.2s}
+.social-row a:hover{background:var(--dark);border-color:var(--dark);color:#fff}
+.social-row svg{width:15px;height:15px}
+.hey-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:3.5rem;align-items:start}
+.hey-lead{font-family:var(--display);font-size:1.2rem;font-weight:500;line-height:1.4}
+.hey-body p{font-size:0.98rem;color:var(--ink-soft);line-height:1.85;margin-bottom:1.1rem}
+.hey-body strong{color:var(--ink);font-weight:600}
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--display);font-weight:600;font-size:0.88rem;color:#fff;background:var(--dark);padding:0.85rem 1.6rem;border-radius:var(--r-pill);text-decoration:none;border:none;cursor:pointer;transition:background 0.2s,transform 0.2s}
+.btn-primary:hover{background:var(--green-deep);transform:translateY(-2px)}
+.btn-outline{display:inline-flex;align-items:center;gap:0.5rem;font-family:var(--display);font-weight:600;font-size:0.88rem;color:var(--ink);background:transparent;padding:0.85rem 1.6rem;border-radius:var(--r-pill);text-decoration:none;border:1.5px solid var(--line);transition:border-color 0.2s,transform 0.2s,background 0.2s}
+.btn-outline:hover{border-color:var(--ink);transform:translateY(-2px);background:var(--paper)}
+.hey-actions{margin-top:1.5rem;display:flex;gap:0.75rem;flex-wrap:wrap}
+
+.statement{margin-top:5rem;text-align:center;font-family:var(--display);font-size:clamp(1.3rem,3vw,2rem);font-weight:500;line-height:1.5;color:var(--ink-faint);letter-spacing:-0.01em}
+.statement strong{color:var(--ink);font-weight:700}
+.statement em{color:var(--green-deep);font-style:normal;font-weight:600}
+
+/* ============ SERVICES ============ */
+#services{background:var(--cream2);border-radius:var(--r-lg);max-width:1180px;margin:0 auto 0;padding:5rem 3rem}
+.svc-row{display:flex;justify-content:space-between;align-items:center;padding:1.6rem 0;border-top:1px solid var(--line);transition:padding-left 0.25s}
+.svc-row:last-child{border-bottom:1px solid var(--line)}
+.svc-row:hover{padding-left:0.6rem}
+.svc-name{font-family:var(--display);font-size:1.4rem;font-weight:600}
+.svc-tags{font-family:var(--mono);font-size:0.72rem;color:var(--ink-soft);letter-spacing:0.03em;text-align:right}
+
+/* ============ PROJECTS ============ */
+.section-label{font-family:var(--mono);font-size:0.72rem;color:var(--green-deep);letter-spacing:0.18em;text-transform:uppercase;margin-bottom:0.7rem;display:flex;align-items:center;gap:0.65rem}
+.section-label::before{content:'';display:block;width:22px;height:1px;background:var(--green-deep)}
+.section-title-row{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;gap:1rem;flex-wrap:wrap}
+.section-title{font-family:var(--display);font-size:clamp(1.9rem,4vw,2.8rem);font-weight:700;letter-spacing:-0.03em;line-height:1.08}
+.view-all{font-family:var(--display);font-size:0.85rem;font-weight:600;color:var(--ink);text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem;border-bottom:1.5px solid var(--ink);padding-bottom:2px;white-space:nowrap}
+
+.projects-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem}
+.project-card{border-radius:var(--r-md);overflow:visible;opacity:0;transform:translateY(20px);transition:opacity 0.5s ease,transform 0.5s ease;text-decoration:none;display:block;color:var(--ink)}
+.project-card.visible{opacity:1;transform:translateY(0)}
+.project-img{aspect-ratio:16/10;border-radius:var(--r-md);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:transform 0.35s ease,border-color 0.35s ease;border:1px solid var(--line)}
+.project-card:hover .project-img{border-color:var(--ink-faint)}
+.project-img img{width:100%;height:100%;object-fit:cover;border-radius:12px}
+.project-slider{position:relative;width:100%;height:100%}
+.project-slide{position:absolute;inset:0;opacity:0;transition:opacity 0.6s ease}
+.project-slide.active{opacity:1}
+.project-slide img{width:100%;height:100%;object-fit:cover;display:block}
+.project-media{display:flex;flex-direction:column}
+.project-dots{position:static;display:flex;align-items:center;justify-content:center;gap:7px;margin-top:0.7rem;background:none;padding:0}
+.project-dot{width:6px;height:6px;border-radius:50%;background:var(--line);border:none;padding:0;cursor:pointer;transition:background 0.2s,transform 0.2s;flex-shrink:0}
+.project-dot.active{background:var(--green);transform:scale(1.4)}
+.p-erp{background:#12653F}
+.p-ess{background:#2A3A6B}
+.p-gym{background:#6B2A5C}
+.p-hms{background:#0E6B6B}
+.p-pos{background:#6B5A1E}
+.project-name{font-family:var(--display);font-size:1.35rem;font-weight:700}
+.project-desc{font-size:0.85rem;color:var(--ink-soft);margin-top:0.2rem}
+.project-longdesc{font-size:0.83rem;color:var(--ink-soft);line-height:1.65;margin-top:0.55rem}
+
+/* DEVELOPING SINCE label */
+.hero-since{font-family:var(--display);font-weight:700;font-size:clamp(0.85rem,2.2vw,1.25rem);letter-spacing:0.22em;text-transform:uppercase;color:var(--ink);text-align:center;margin-top:0.6rem;opacity:0;animation:fadeUp 0.7s 0.55s ease both}
+
+/* ============ MARQUEE SLIDERS ============ */
+.sliders-wrap{position:relative;z-index:1;padding:3.5rem 0;overflow:hidden;background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.slider-row{display:flex;width:max-content;gap:0;margin-bottom:0.85rem}
+.slider-row:last-child{margin-bottom:0}
+.slider-row-left{animation:slideLeft 28s linear infinite}
+.slider-row-right{animation:slideRight 32s linear infinite}
+.sliders-wrap:hover .slider-row{animation-play-state:paused}
+@keyframes slideLeft{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes slideRight{0%{transform:translateX(-50%)}100%{transform:translateX(0)}}
+.slide-item{display:inline-flex;align-items:center;gap:1.2rem;padding:0.75rem 2rem;white-space:nowrap;font-family:var(--display);font-size:0.92rem;font-weight:500;color:var(--ink-soft);border:1px solid var(--line);border-radius:var(--r-pill);margin-right:0.75rem;background:var(--paper);transition:border-color 0.2s,color 0.2s,background 0.2s}
+.slide-item:hover{border-color:var(--green);color:var(--green-deep);background:var(--green-dim)}
+.slide-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0}
+.slide-item-dark{background:var(--dark);color:rgba(255,255,255,0.75);border-color:rgba(255,255,255,0.1)}
+.slide-item-dark:hover{border-color:var(--green);color:var(--green);background:var(--dark2)}
+.slide-item-dark .slide-dot{background:var(--green)}
+#skills{background:var(--cream2);border-radius:var(--r-lg);max-width:1180px;margin:0 auto;padding:5rem 3rem}
+.skills-timeline{position:relative;max-width:920px;margin:1rem auto 0;padding:0.5rem 0}
+.skills-timeline::before{content:'';position:absolute;left:50%;top:6px;bottom:6px;width:2px;background:var(--line);transform:translateX(-50%)}
+.tl-item{position:relative;display:flex;margin-bottom:1.5rem}
+.tl-item.tl-left{justify-content:flex-end;padding-right:calc(50% + 28px)}
+.tl-item.tl-right{justify-content:flex-start;padding-left:calc(50% + 28px)}
+.tl-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);padding:1.2rem 1.4rem;width:100%}
+.tl-item.tl-left .tl-card{text-align:right}
+.tl-label{font-family:var(--mono);font-size:0.64rem;color:var(--green-deep);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.55rem}
+.tl-item.tl-left .skill-chips{justify-content:flex-end}
+.tl-dot{position:absolute;top:1.4rem;left:50%;transform:translate(-50%,-50%);width:12px;height:12px;border-radius:50%;background:var(--green);border:3px solid var(--cream2);z-index:1}
+.skill-chips{display:flex;flex-wrap:wrap;gap:0.4rem}
+.chip{font-family:var(--display);font-size:0.75rem;font-weight:500;color:var(--ink);background:var(--cream2);border:1px solid var(--line);padding:0.35rem 0.8rem;border-radius:var(--r-pill);transition:border-color 0.2s,background 0.2s}
+.chip:hover{border-color:var(--green);background:var(--green-dim)}
+.tl-item .tl-card .chip{background:var(--cream2)}
+
+/* ============ ABOUT ============ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.about-text p{font-size:0.95rem;color:var(--ink-soft);line-height:1.85;margin-bottom:1.1rem}
+.about-text p strong{color:var(--ink);font-weight:600}
+.achievements{display:flex;flex-direction:column;gap:0.9rem}
+.ach{display:flex;align-items:flex-start;gap:1.1rem;padding:1.2rem 1.4rem;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-md);transition:border-color 0.25s,transform 0.25s}
+.ach:hover{border-color:var(--green);transform:translateY(-2px)}
+.ach-icon{font-size:1.2rem;width:36px;flex-shrink:0;text-align:center}
+.ach-title{font-family:var(--display);font-size:0.92rem;font-weight:700;margin-bottom:0.25rem}
+.ach-desc{font-size:0.8rem;color:var(--ink-soft);line-height:1.6}
+
+/* ============ GALLERY MARQUEE ============ */
+.gallery-wrap{position:relative;padding:1.5rem 0 3.5rem;overflow:hidden;display:flex;flex-direction:column;gap:1.1rem}
+.gallery-wrap::before,.gallery-wrap::after{content:'';position:absolute;top:1.5rem;bottom:3.5rem;width:10%;z-index:2;pointer-events:none}
+.gallery-wrap::before{left:0;background:linear-gradient(90deg,var(--cream),rgba(243,239,229,0))}
+.gallery-wrap::after{right:0;background:linear-gradient(270deg,var(--cream),rgba(243,239,229,0))}
+.gallery-row{display:flex;gap:1.1rem;width:max-content}
+.gallery-left{animation:galleryLeft 46s linear infinite}
+.gallery-right{animation:galleryRight 46s linear infinite}
+.gallery-row:hover{animation-play-state:paused}
+@keyframes galleryLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes galleryRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.gallery-item{position:relative;flex-shrink:0;width:300px;height:190px;border-radius:var(--r-md);background-size:cover;background-position:center;overflow:hidden;border:1px solid var(--line)}
+.gallery-item-label{position:absolute;left:0;right:0;bottom:0;padding:0.85rem 1.1rem;background:linear-gradient(180deg,transparent,rgba(8,10,7,0.72));color:#fff;font-family:var(--display);font-weight:600;font-size:0.82rem}
+
+/* ============ THOUGHTS ============ */
+.thoughts-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.1rem}
+.thought-card{position:relative;border-radius:var(--r-md);overflow:hidden;min-height:290px;display:flex;flex-direction:column;justify-content:flex-end;padding:1.5rem;text-decoration:none;color:#fff;background-size:cover;background-position:center;background-color:var(--dark2)}
+.thought-card::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(21,19,15,0.15),rgba(21,19,15,0.88));z-index:0}
+.thought-card>*{position:relative;z-index:1}
+.thought-date{font-family:var(--mono);font-size:0.68rem;color:rgba(255,255,255,0.55);margin-bottom:0.5rem}
+.thought-title{font-family:var(--display);font-size:1.25rem;font-weight:700;line-height:1.2;margin-bottom:0.6rem}
+.thought-desc{font-size:0.82rem;color:rgba(255,255,255,0.55);line-height:1.5}
+.thought-cta{background:var(--dark);display:flex;flex-direction:column;justify-content:space-between}
+.thought-cta .thought-title{font-size:1.4rem}
+.thought-cta .view-all-dark{font-family:var(--display);font-size:0.85rem;font-weight:600;color:#fff;text-decoration:none;display:inline-flex;align-items:center;gap:0.4rem;border-bottom:1.5px solid rgba(255,255,255,0.4);padding-bottom:2px;width:fit-content}
+.contact-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:4rem;align-items:start;margin-top:2.2rem}
+.contact-info p{font-size:0.95rem;color:var(--ink-soft);line-height:1.85;margin-bottom:1.6rem}
+.contact-methods{display:flex;flex-direction:column;gap:0.6rem}
+.cmethod{display:flex;align-items:center;gap:0.75rem;font-family:var(--display);font-size:0.85rem;font-weight:500;color:var(--ink);text-decoration:none;padding:0.85rem 1.1rem;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-sm);transition:border-color 0.2s,background 0.2s,transform 0.2s}
+.cmethod:hover{border-color:var(--green);background:var(--green-dim);transform:translateX(4px)}
+.cmethod svg{width:16px;height:16px;flex-shrink:0}
+.cmethod span{color:var(--ink-faint);font-family:var(--mono);font-size:0.65rem;margin-left:auto}
+.contact-form-panel{background:var(--dark);border-radius:var(--r-lg);padding:2.75rem}
+.contact-form{display:flex;flex-direction:column;gap:1rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.form-group{display:flex;flex-direction:column;gap:0.4rem}
+.form-label{font-family:var(--mono);font-size:0.65rem;color:rgba(255,255,255,0.45);letter-spacing:0.1em;text-transform:uppercase}
+.form-input,.form-textarea{font-family:var(--body);font-size:0.9rem;color:#fff;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:var(--r-sm);padding:0.8rem 1rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s;resize:none}
+.form-input::placeholder,.form-textarea::placeholder{color:rgba(255,255,255,0.3)}
+.form-input:focus,.form-textarea:focus{border-color:var(--green);outline:2px solid rgba(29,191,115,0.28);outline-offset:1px}
+.form-textarea{min-height:120px}
+.form-submit{font-family:var(--display);font-size:0.9rem;font-weight:700;color:#08150E;background:var(--green);padding:0.95rem 2rem;border-radius:var(--r-pill);border:none;cursor:pointer;transition:background 0.2s,transform 0.2s;display:flex;align-items:center;justify-content:center;gap:0.5rem}
+.form-submit:hover{background:#22d17f;transform:translateY(-2px)}
+.form-success{display:none;font-family:var(--display);font-size:0.85rem;color:var(--green);background:rgba(29,191,115,0.1);border:1px solid rgba(29,191,115,0.25);border-radius:var(--r-sm);padding:0.9rem;text-align:center}
+
+/* ============ FOOTER ============ */
+footer{position:relative;background:var(--dark);width:100%;margin:0;padding:5rem 0 0;color:#fff;overflow:hidden;z-index:1}
+.footer-inner{position:relative;z-index:2;max-width:1180px;margin:0 auto;padding:0 3.5rem}
+.footer-name-bg{position:relative;z-index:1;width:100%;overflow:hidden;line-height:0.82;pointer-events:none;user-select:none;text-align:center;margin-top:1.5rem;display:flex;flex-direction:column;align-items:center;gap:0}
+.footer-name-bg span{font-family:var(--display);font-weight:700;font-size:clamp(4rem,12vw,10rem);letter-spacing:-0.03em;white-space:nowrap;display:block;background-image:linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.01));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;line-height:0.9}
+.footer-top{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2rem;padding-bottom:3rem}
+.footer-headline{font-family:var(--display);font-size:clamp(1.9rem,4vw,2.7rem);font-weight:700;letter-spacing:-0.03em;line-height:1.08}
+.footer-headline .accent{color:var(--green)}
+.footer-col-label{font-family:var(--mono);font-size:0.65rem;color:rgba(255,255,255,0.4);letter-spacing:0.14em;text-transform:uppercase;margin-bottom:1rem}
+.footer-links{display:flex;flex-direction:column;gap:0.65rem}
+.footer-links a{font-family:var(--display);font-size:0.88rem;font-weight:500;color:rgba(255,255,255,0.75);text-decoration:none;transition:color 0.2s}
+.footer-links a:hover{color:var(--green)}
+.footer-pill-links{display:flex;flex-wrap:wrap;gap:0.55rem}
+.footer-pill{font-family:var(--display);font-size:0.8rem;font-weight:600;color:#fff;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.14);padding:0.5rem 1rem;border-radius:var(--r-pill);text-decoration:none;transition:background 0.2s,border-color 0.2s}
+.footer-pill:hover{background:var(--green);border-color:var(--green);color:#08150E}
+.footer-bottom{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:1.75rem 3.5rem;border-top:1px solid rgba(255,255,255,0.1);flex-wrap:wrap;gap:1rem;max-width:1180px;margin:0 auto}
+.footer-bottom-l{font-family:var(--mono);font-size:0.68rem;color:rgba(255,255,255,0.4)}
+.footer-social{display:flex;gap:0.6rem}
+.footer-social a{width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;text-decoration:none;color:#fff;transition:background 0.2s,border-color 0.2s}
+.footer-social a:hover{background:var(--green);border-color:var(--green);color:#08150E}
+.footer-social svg{width:13px;height:13px}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.65s ease,transform 0.65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:1000px){
+  .hey-grid,.about-grid,.contact-grid{grid-template-columns:1fr;gap:2.5rem}
+  .projects-grid{grid-template-columns:1fr}
+  .skills-timeline{max-width:100%}
+  .tl-item.tl-left{padding-right:calc(50% + 18px)}
+  .tl-item.tl-right{padding-left:calc(50% + 18px)}
+  .thoughts-grid{grid-template-columns:1fr}
+  .footer-top{grid-template-columns:1fr;gap:2.5rem}
+  #services,#skills{padding:3.5rem 2rem;border-radius:var(--r-md)}
+  .contact-form-panel{padding:2rem}
+  .footer-inner,.footer-bottom{padding-left:2rem;padding-right:2rem}
+}
+@media(max-width:640px){
+  .hero{padding:7rem 1.25rem 2.5rem}
+  .hero-headline .row{gap:0.7rem}
+  .hero-spark{min-width:18px}
+  .hero-meta{grid-template-columns:1fr;justify-items:start;gap:0.5rem}
+  .hero-meta>span:last-child{text-align:left}
+  .hero-tw{width:100%;justify-content:flex-start}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .stat-item:nth-child(2){border-right:none}
+  section{padding:3.5rem 1.25rem}
+  .svc-row{flex-direction:column;align-items:flex-start;gap:0.4rem}
+  .svc-tags{text-align:left}
+  .skills-timeline::before{left:20px}
+  .tl-item.tl-left,.tl-item.tl-right{justify-content:flex-start;padding-left:48px;padding-right:0}
+  .tl-item.tl-left .tl-card{text-align:left}
+  .tl-item.tl-left .skill-chips{justify-content:flex-start}
+  .tl-dot{left:20px}
+  .form-row{grid-template-columns:1fr}
+  .contact-form-panel{padding:1.5rem}
+  .footer-inner,.footer-bottom{padding-left:1.25rem;padding-right:1.25rem}
+  .footer-name-bg{margin-top:0.5rem}
+}
+
+/* ═══════════════════════════════════════════════
+   PAGE LOADER
+═══════════════════════════════════════════════ */
+#page-loader{position:fixed;inset:0;z-index:9999;background:var(--dark);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.25rem;transition:opacity 0.5s ease,visibility 0.5s ease}
+#page-loader.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.loader-logo{font-family:var(--display);font-size:1.6rem;font-weight:800;color:var(--w, #EEEEF0);letter-spacing:-0.03em}
+.loader-logo span{color:var(--green,#22C55E)}
+.loader-bar{width:160px;height:2px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden}
+.loader-fill{height:100%;width:0%;background:var(--green,#22C55E);border-radius:2px;animation:loaderFill 1.4s cubic-bezier(0.4,0,0.2,1) forwards}
+@keyframes loaderFill{0%{width:0%}60%{width:80%}100%{width:100%}}
+.loader-label{font-family:var(--mono,monospace);font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:0.2em;text-transform:uppercase}
+
+/* ═══════════════════════════════════════════════
+   FLOATING CONTACT BUTTONS
+═══════════════════════════════════════════════ */
+.float-contact{position:fixed;bottom:1.75rem;right:1.5rem;z-index:400;display:flex;flex-direction:column;align-items:center;gap:0.65rem}
+.float-btn{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.18);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.25s ease,opacity 0.3s ease;opacity:0;transform:translateY(20px) scale(0.8)}
+.float-btn.ready{opacity:1;transform:translateY(0) scale(1)}
+.float-btn:hover{transform:translateY(-3px) scale(1.12);box-shadow:0 8px 28px rgba(0,0,0,0.25)}
+.float-btn svg{width:20px;height:20px;fill:white;flex-shrink:0}
+.float-btn.wa{background:#25D366;transition-delay:0.05s}
+.float-btn.em{background:#EA4335;transition-delay:0.1s}
+.float-btn.ph{background:var(--dark,#15130F);border:1px solid rgba(255,255,255,0.15);transition-delay:0.15s}
+.float-tooltip{position:absolute;right:54px;background:var(--dark,#15130F);color:#fff;font-family:var(--mono,monospace);font-size:0.65rem;letter-spacing:0.06em;white-space:nowrap;padding:0.3rem 0.7rem;border-radius:6px;opacity:0;pointer-events:none;transition:opacity 0.2s}
+.float-btn:hover .float-tooltip{opacity:1}
+
+/* ═══════════════════════════════════════════════
+   PROJECT CARD — View Project button
+═══════════════════════════════════════════════ */
+.project-card{cursor:pointer}
+.project-body{padding:1.1rem 0.2rem 0;display:flex;flex-direction:column;gap:0.35rem}
+.project-body-top{display:flex;align-items:center;justify-content:space-between;gap:0.75rem}
+.project-cta{display:inline-flex;align-items:center;gap:0.4rem;margin-top:0;flex-shrink:0;white-space:nowrap;font-family:var(--mono,monospace);font-size:0.72rem;font-weight:600;color:var(--green-deep,#12653F);letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;padding-bottom:1px;width:fit-content;transition:gap 0.2s,letter-spacing 0.2s}
+.project-card:hover .project-cta{gap:0.65rem;letter-spacing:0.1em}
+
+/* ═══════════════════════════════════════════════
+   SMOOTH PAGE ANIMATIONS
+═══════════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s cubic-bezier(0.4,0,0.2,1),transform 0.7s cubic-bezier(0.4,0,0.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-left{opacity:0;transform:translateX(-28px);transition:opacity 0.7s cubic-bezier(0.4,0,0.2,1),transform 0.7s cubic-bezier(0.4,0,0.2,1)}
+.reveal-left.visible{opacity:1;transform:translateX(0)}
+.reveal-right{opacity:0;transform:translateX(28px);transition:opacity 0.7s cubic-bezier(0.4,0,0.2,1),transform 0.7s cubic-bezier(0.4,0,0.2,1)}
+.reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-scale{opacity:0;transform:scale(0.94);transition:opacity 0.6s cubic-bezier(0.4,0,0.2,1),transform 0.6s cubic-bezier(0.34,1.56,0.64,1)}
+.reveal-scale.visible{opacity:1;transform:scale(1)}
+</style>
+</head>
+<body>
+
+<!-- PAGE LOADER -->
+<div id="page-loader">
+  <div class="loader-logo">Muhammad Rizwan Ahmad<span>.</span></div>
+  <div class="loader-bar"><div class="loader-fill"></div></div>
+  <div class="loader-label">Loading portfolio</div>
+</div>
+
+<!-- FLOATING CONTACT -->
+<div class="float-contact" id="floatContact">
+  <a href="https://wa.me/923237004270" target="_blank" class="float-btn wa" aria-label="WhatsApp">
+    <span class="float-tooltip">WhatsApp</span>
+    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+  <a href="mailto:rimalik162534@gmail.com" class="float-btn em" aria-label="Email">
+    <span class="float-tooltip">Email Me</span>
+    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+  </a>
+  <a href="tel:+923237004270" class="float-btn ph" aria-label="Call">
+    <span class="float-tooltip">+92 323 700 4270</span>
+    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+  </a>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav-pill">
+    <a href="#hey" onclick="closeNav()"><span class="nav-name"><span class="nav-dot"></span>Muhammad Rizwan</span></a>
+    <button class="nav-toggle" onclick="document.getElementById('navDrop').classList.toggle('open')" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</div>
+<div class="nav-drop" id="navDrop">
+  <a href="#projects" onclick="closeNav()">Projects</a>
+  <a href="#skills" onclick="closeNav()">Skills</a>
+  <a href="#about" onclick="closeNav()">About</a>
+  <a href="#contact" onclick="closeNav()">Contact</a>
+  <a href="mailto:rimalik162534@gmail.com" class="drop-hire" onclick="closeNav()">Hire Me</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <h1 class="hero-headline">
+    <div class="row">
+      <svg class="hero-spark" viewBox="0 0 24 24" fill="var(--green)"><path d="M12 0c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8z"/></svg>
+      <span>ORACLE</span>
+      <svg class="hero-spark" viewBox="0 0 24 24" fill="var(--green)"><path d="M12 0c1 5 3 7 8 8-5 1-7 3-8 8-1-5-3-7-8-8 5-1 7-3 8-8z"/></svg>
+    </div>
+    <div class="row">
+      <span>APEX</span><span>DEVELOPER</span>
+    </div>
+  </h1>
+  <div class="hero-since">✦ Developing Since 2022 ✦</div>
+  <div class="hero-meta">
+    <span>&copy;2026 &middot; Faisalabad, PK</span>
+    <span class="hero-tw"><span id="tw" style="display:inline-block;will-change:contents"></span><span class="cursor"></span></span>
+    <span>/BUILDING SINCE 2022</span>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-number">3<span>+</span></div><div class="stat-label">Years APEX</div></div>
+    <div class="stat-item"><div class="stat-number">5</div><div class="stat-label">Live Systems</div></div>
+    <div class="stat-item"><div class="stat-number">1K<span>+</span></div><div class="stat-label">PDF / Batch</div></div>
+    <div class="stat-item"><div class="stat-number">10<span>+</span></div><div class="stat-label">ERP Modules</div></div>
+  </div>
+</div>
+
+<!-- MARQUEE SLIDERS -->
+<div class="sliders-wrap">
+  <!-- ROW 1: scrolls LEFT — Oracle/APEX technical skills -->
+  <div class="slider-row slider-row-left">
+    <!-- duplicate set for seamless loop -->
+    <span class="slide-item"><span class="slide-dot"></span>Oracle APEX 19.1 → 24.2</span>
+    <span class="slide-item"><span class="slide-dot"></span>Oracle DB 19c → 26ai</span>
+    <span class="slide-item"><span class="slide-dot"></span>PL/SQL Development</span>
+    <span class="slide-item"><span class="slide-dot"></span>ORDS · REST Services</span>
+    <span class="slide-item"><span class="slide-dot"></span>Interactive Reports & Grids</span>
+    <span class="slide-item"><span class="slide-dot"></span>Workflow Automation</span>
+    <span class="slide-item"><span class="slide-dot"></span>RBAC & Secure Auth</span>
+    <span class="slide-item"><span class="slide-dot"></span>PDF Engine 1000+/batch</span>
+    <span class="slide-item"><span class="slide-dot"></span>OCI Cloud Infrastructure</span>
+    <span class="slide-item"><span class="slide-dot"></span>Apache ECharts Dashboards</span>
+    <span class="slide-item"><span class="slide-dot"></span>TOAD for Oracle</span>
+    <span class="slide-item"><span class="slide-dot"></span>Oracle Forms 6i / 12c</span>
+    <!-- duplicate -->
+    <span class="slide-item"><span class="slide-dot"></span>Oracle APEX 19.1 → 24.2</span>
+    <span class="slide-item"><span class="slide-dot"></span>Oracle DB 19c → 26ai</span>
+    <span class="slide-item"><span class="slide-dot"></span>PL/SQL Development</span>
+    <span class="slide-item"><span class="slide-dot"></span>ORDS · REST Services</span>
+    <span class="slide-item"><span class="slide-dot"></span>Interactive Reports & Grids</span>
+    <span class="slide-item"><span class="slide-dot"></span>Workflow Automation</span>
+    <span class="slide-item"><span class="slide-dot"></span>RBAC & Secure Auth</span>
+    <span class="slide-item"><span class="slide-dot"></span>PDF Engine 1000+/batch</span>
+    <span class="slide-item"><span class="slide-dot"></span>OCI Cloud Infrastructure</span>
+    <span class="slide-item"><span class="slide-dot"></span>Apache ECharts Dashboards</span>
+    <span class="slide-item"><span class="slide-dot"></span>TOAD for Oracle</span>
+    <span class="slide-item"><span class="slide-dot"></span>Oracle Forms 6i / 12c</span>
+  </div>
+  <!-- ROW 2: scrolls RIGHT — delivery, tools, business context -->
+  <div class="slider-row slider-row-right">
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>ERP Systems · Full Cycle</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Application Delivery & Handover</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Oracle Local Install & Setup</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Google Drive API Integration</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Bulk Invoice Generation</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Node.js Browser-to-Printer</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>SQL Developer · TOAD</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Excel Export · Classic Reports</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>APEX Security & Session Control</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Git · GitHub · Deployment</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Tomcat · Nginx · OCI</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Forms 6i Migration to APEX</span>
+    <!-- duplicate -->
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>ERP Systems · Full Cycle</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Application Delivery & Handover</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Oracle Local Install & Setup</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Google Drive API Integration</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Bulk Invoice Generation</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Node.js Browser-to-Printer</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>SQL Developer · TOAD</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Excel Export · Classic Reports</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>APEX Security & Session Control</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Git · GitHub · Deployment</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Tomcat · Nginx · OCI</span>
+    <span class="slide-item slide-item-dark"><span class="slide-dot"></span>Forms 6i Migration to APEX</span>
+  </div>
+</div>
+
+<!-- HEY -->
+<section id="hey">
+  <div class="section-inner">
+    <div class="hey-head">
+      <h2 class="hey-title reveal">Hey!</h2>
+      <div class="social-row reveal">
+        <a href="https://linkedin.com/in/rizwan0626" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="mailto:rimalik162534@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        <a href="tel:+923237004270" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.15a16 16 0 006.29 6.29l1.42-1.42a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+      </div>
+    </div>
+    <div class="hey-grid">
+      <div class="hey-lead reveal">I'm Muhammad, an Oracle APEX developer based in Faisalabad, Pakistan, currently building enterprise systems at JK Group of Companies.</div>
+      <div class="hey-body reveal">
+        <p>I'm a software engineer with a strong focus on <strong>Oracle APEX, ERP platforms, and workflow automation</strong> &mdash; systems that run real business operations, not sandbox demos.</p>
+        <p>Over the past 3+ years I've shipped 5 production systems including a full ERP, a multi-level approval workflow, and a bulk PDF engine generating <strong>1000+ documents per batch</strong>, helping businesses replace manual processes with reliable software.</p>
+        <div class="hey-actions">
+          <a href="#projects" class="btn-primary">View Live Projects &rarr;</a>
+          <a href="#contact" class="btn-outline">Get In Touch</a>
+        </div>
+      </div>
+    </div>
+    <div class="statement reveal"><strong>From</strong> idea to launch. Clean, scalable enterprise systems built to move fast, stay reliable, and handle <em>real business operations</em> at scale.</div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label reveal">What I Build</div>
+  <h2 class="section-title reveal" style="margin-bottom:1.5rem">Services</h2>
+  <div class="svc-row reveal"><div class="svc-name">ERP & Business Systems</div><div class="svc-tags">Oracle APEX &middot; PL/SQL &middot; ORDS</div></div>
+  <div class="svc-row reveal"><div class="svc-name">Workflow Automation</div><div class="svc-tags">Approvals &middot; RBAC &middot; Notifications</div></div>
+  <div class="svc-row reveal"><div class="svc-name">REST & Cloud Integrations</div><div class="svc-tags">REST APIs &middot; OCI &middot; Google Drive</div></div>
+  <div class="svc-row reveal"><div class="svc-name">Reporting & PDF Engines</div><div class="svc-tags">Bulk Invoicing &middot; Dashboards &middot; Excel Export</div></div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-title-row">
+      <div>
+        <div class="section-label reveal">Live Demos</div>
+        <h2 class="section-title reveal">Production Systems<br>Built &amp; Deployed</h2>
+      </div>
+      <a href="#projects" class="view-all reveal">View All Work &rarr;</a>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card reveal-scale">
+        <div class="project-media">
+        <div class="project-img">
+        <div class="project-slider">
+          <div class="project-slide active"><img loading="lazy" decoding="async" src="images/erp/Oracle APEX Projects Images.png" alt="AG Traders ERP screenshot 1" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="AG Traders ERP screenshot 2" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="AG Traders ERP screenshot 3" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="AG Traders ERP screenshot 4" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="AG Traders ERP screenshot 5" onerror="this.parentElement.style.display='none'"></div>
+        </div>
+        </div>
+        <div class="project-dots"><button class="project-dot active" onclick="goToSlide(event,this,0)" aria-label="Slide 1"></button><button class="project-dot" onclick="goToSlide(event,this,1)" aria-label="Slide 2"></button><button class="project-dot" onclick="goToSlide(event,this,2)" aria-label="Slide 3"></button><button class="project-dot" onclick="goToSlide(event,this,3)" aria-label="Slide 4"></button><button class="project-dot" onclick="goToSlide(event,this,4)" aria-label="Slide 5"></button></div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-top">
+            <div class="project-name">AG Traders ERP</div>
+            <a href="https://erp.oracleapex.me" target="_blank" class="project-cta">View Project &rarr;</a>
+          </div>
+          <div class="project-desc">Enterprise ERP System &middot; Oracle APEX</div>
+          <p class="project-longdesc">Complete ERP covering Purchase, Sales, Production, Order Management, and Job Work &mdash; with custom invoicing and real-time stock tracking, built entirely in Oracle APEX.</p>
+        </div>
+      </div>
+
+      <div class="project-card reveal-scale">
+        <div class="project-media">
+        <div class="project-img">
+        <div class="project-slider">
+          <div class="project-slide active"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Employee Self-Service screenshot 1" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Employee Self-Service screenshot 2" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Employee Self-Service screenshot 3" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Employee Self-Service screenshot 4" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Employee Self-Service screenshot 5" onerror="this.parentElement.style.display='none'"></div>
+        </div>
+        </div>
+        <div class="project-dots"><button class="project-dot active" onclick="goToSlide(event,this,0)" aria-label="Slide 1"></button><button class="project-dot" onclick="goToSlide(event,this,1)" aria-label="Slide 2"></button><button class="project-dot" onclick="goToSlide(event,this,2)" aria-label="Slide 3"></button><button class="project-dot" onclick="goToSlide(event,this,3)" aria-label="Slide 4"></button><button class="project-dot" onclick="goToSlide(event,this,4)" aria-label="Slide 5"></button></div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-top">
+            <div class="project-name">Employee Self-Service</div>
+            <a href="https://ess.oracleapex.me" target="_blank" class="project-cta">View Project &rarr;</a>
+          </div>
+          <div class="project-desc">Approval Workflow System &middot; RBAC</div>
+          <p class="project-longdesc">Multi-level HOD/CEO approval routing with role-based access control &mdash; every user sees only their own environment after login.</p>
+        </div>
+      </div>
+
+      <div class="project-card reveal-scale">
+        <div class="project-media">
+        <div class="project-img">
+        <div class="project-slider">
+          <div class="project-slide active"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Gym Management screenshot 1" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Gym Management screenshot 2" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Gym Management screenshot 3" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Gym Management screenshot 4" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Gym Management screenshot 5" onerror="this.parentElement.style.display='none'"></div>
+        </div>
+        </div>
+        <div class="project-dots"><button class="project-dot active" onclick="goToSlide(event,this,0)" aria-label="Slide 1"></button><button class="project-dot" onclick="goToSlide(event,this,1)" aria-label="Slide 2"></button><button class="project-dot" onclick="goToSlide(event,this,2)" aria-label="Slide 3"></button><button class="project-dot" onclick="goToSlide(event,this,3)" aria-label="Slide 4"></button><button class="project-dot" onclick="goToSlide(event,this,4)" aria-label="Slide 5"></button></div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-top">
+            <div class="project-name">Gym Management</div>
+            <a href="https://gym.oracleapex.me" target="_blank" class="project-cta">View Project &rarr;</a>
+          </div>
+          <div class="project-desc">Membership &amp; Billing Platform</div>
+          <p class="project-longdesc">Member registration, automated fee collection, attendance tracking, and a real-time analytics dashboard for gym owners.</p>
+        </div>
+      </div>
+
+      <div class="project-card reveal-scale">
+        <div class="project-media">
+        <div class="project-img">
+        <div class="project-slider">
+          <div class="project-slide active"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Hospital Management screenshot 1" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Hospital Management screenshot 2" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Hospital Management screenshot 3" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Hospital Management screenshot 4" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Hospital Management screenshot 5" onerror="this.parentElement.style.display='none'"></div>
+        </div>
+        </div>
+        <div class="project-dots"><button class="project-dot active" onclick="goToSlide(event,this,0)" aria-label="Slide 1"></button><button class="project-dot" onclick="goToSlide(event,this,1)" aria-label="Slide 2"></button><button class="project-dot" onclick="goToSlide(event,this,2)" aria-label="Slide 3"></button><button class="project-dot" onclick="goToSlide(event,this,3)" aria-label="Slide 4"></button><button class="project-dot" onclick="goToSlide(event,this,4)" aria-label="Slide 5"></button></div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-top">
+            <div class="project-name">Hospital Management</div>
+            <a href="https://hms.oracleapex.me" target="_blank" class="project-cta">View Project &rarr;</a>
+          </div>
+          <div class="project-desc">Patient &amp; Staff Records System</div>
+          <p class="project-longdesc">Patient registration, doctor/nurse scheduling, payroll, an admin dashboard, and full compliance audit logs.</p>
+        </div>
+      </div>
+
+      <div class="project-card reveal-scale">
+        <div class="project-media">
+        <div class="project-img">
+        <div class="project-slider">
+          <div class="project-slide active"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Point of Sale screenshot 1" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Point of Sale screenshot 2" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Point of Sale screenshot 3" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Point of Sale screenshot 4" onerror="this.parentElement.style.display='none'"></div>
+          <div class="project-slide"><img loading="lazy" decoding="async" src="https://i.ibb.co/JfbkpdN/Thumbnail.png" alt="Point of Sale screenshot 5" onerror="this.parentElement.style.display='none'"></div>
+        </div>
+        </div>
+        <div class="project-dots"><button class="project-dot active" onclick="goToSlide(event,this,0)" aria-label="Slide 1"></button><button class="project-dot" onclick="goToSlide(event,this,1)" aria-label="Slide 2"></button><button class="project-dot" onclick="goToSlide(event,this,2)" aria-label="Slide 3"></button><button class="project-dot" onclick="goToSlide(event,this,3)" aria-label="Slide 4"></button><button class="project-dot" onclick="goToSlide(event,this,4)" aria-label="Slide 5"></button></div>
+        </div>
+        <div class="project-body">
+          <div class="project-body-top">
+            <div class="project-name">Point of Sale</div>
+            <a href="https://pos.oracleapex.me" target="_blank" class="project-cta">View Project &rarr;</a>
+          </div>
+          <div class="project-desc">Retail Billing &amp; Inventory</div>
+          <p class="project-longdesc">Item management, real-time sales processing, invoice printing, and live inventory tracking built for retail.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label reveal">Technical Stack</div>
+  <h2 class="section-title reveal" style="margin-bottom:1rem">What I Build With</h2>
+  <div class="skills-timeline">
+
+    <div class="tl-item tl-left reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-label">Oracle Core &amp; Versions</div>
+        <div class="skill-chips">
+          <span class="chip">Oracle DB 19c &rarr; 26ai</span>
+          <span class="chip">Oracle APEX 19.1 &rarr; 24.2</span>
+          <span class="chip">PL/SQL</span>
+          <span class="chip">ORDS</span>
+          <span class="chip">OCI</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item tl-right reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-label">APEX Development</div>
+        <div class="skill-chips">
+          <span class="chip">APEX Forms &amp; Reports</span>
+          <span class="chip">Interactive Reports</span>
+          <span class="chip">Interactive Grids</span>
+          <span class="chip">Dynamic Actions</span>
+          <span class="chip">RBAC</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item tl-left reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-label">Tools &amp; Local Setup</div>
+        <div class="skill-chips">
+          <span class="chip">TOAD for Oracle</span>
+          <span class="chip">Oracle Install &amp; Local Setup</span>
+          <span class="chip">SQL Developer</span>
+          <span class="chip">Forms 6i / 12c</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item tl-right reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-label">Integrations</div>
+        <div class="skill-chips">
+          <span class="chip">REST APIs</span>
+          <span class="chip">Google Drive API</span>
+          <span class="chip">ImageBB API</span>
+          <span class="chip">Node.js Print</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item tl-left reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-label">Security &amp; Delivery</div>
+        <div class="skill-chips">
+          <span class="chip">Secure Auth Flows</span>
+          <span class="chip">Role-Based Access Control</span>
+          <span class="chip">App Deployment &amp; Delivery</span>
+          <span class="chip">Production Handover</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item tl-right reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-label">Reporting Engine</div>
+        <div class="skill-chips">
+          <span class="chip">PDF Engine 1000+</span>
+          <span class="chip">Bulk Invoicing</span>
+          <span class="chip">Excel Export</span>
+          <span class="chip">ECharts</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item tl-left reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-label">Frontend</div>
+        <div class="skill-chips">
+          <span class="chip">JavaScript</span>
+          <span class="chip">HTML5/CSS3</span>
+          <span class="chip">jQuery</span>
+          <span class="chip">Responsive UI</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tl-item tl-right reveal">
+      <div class="tl-dot"></div>
+      <div class="tl-card">
+        <div class="tl-label">Infrastructure</div>
+        <div class="skill-chips">
+          <span class="chip">Tomcat</span>
+          <span class="chip">Nginx</span>
+          <span class="chip">Git/GitHub</span>
+          <span class="chip">Deployment Pipelines</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label reveal">Background</div>
+    <h2 class="section-title reveal">Built on Real Systems,<br>Not Tutorials</h2>
+    <div class="about-grid" style="margin-top:2.5rem">
+      <div class="about-text reveal">
+        <p>Oracle APEX Developer based in Faisalabad, Pakistan with <strong>3+ years building production enterprise systems</strong>. Real ERP platforms, real approval workflows, real data &mdash; not sandbox projects.</p>
+        <p>At JK Group of Companies, built an <strong>Employee Self-Service system with multi-level HOD/CEO approval routing</strong>, RBAC, and a PDF invoice engine generating 1000+ documents per batch.</p>
+        <p>Previously at Saylani Welfare International Trust, developed and maintained Oracle APEX enterprise applications for 1.5 years &mdash; building the depth brought to every engagement.</p>
+        <p>Holds a <strong>BS Computer Science from GC University Faisalabad</strong> and an Oracle APEX Development certification. Immediately available for remote contract work.</p>
+      </div>
+      <div class="achievements reveal">
+        <div class="ach"><div class="ach-icon">&#9889;</div><div><div class="ach-title">1000+ PDFs / Single Batch</div><div class="ach-desc">High-performance bulk invoice engine &mdash; 1000+ high-res PDFs in one operation using JavaScript + Oracle APEX.</div></div></div>
+        <div class="ach"><div class="ach-icon">&#128279;</div><div><div class="ach-title">Multi-Level Approval Workflows</div><div class="ach-desc">HOD/CEO approval routing with RBAC &mdash; each user isolated to their own environment post-login.</div></div></div>
+        <div class="ach"><div class="ach-icon">&#9729;&#65039;</div><div><div class="ach-title">OCI + Google Drive Integration</div><div class="ach-desc">Integrated OCI Object Storage and Google Drive API for automated document management.</div></div></div>
+        <div class="ach"><div class="ach-icon">&#128424;&#65039;</div><div><div class="ach-title">Browser-to-Printer Service</div><div class="ach-desc">Node.js service enabling direct printing from Oracle APEX to local printers &mdash; no manual download.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY MARQUEE -->
+<div class="section-inner reveal" style="text-align:center;padding-bottom:0">
+  <div class="section-label" style="justify-content:center">A Closer Look</div>
+  <h2 class="section-title" style="margin-bottom:0.5rem">Selected Work Snapshots</h2>
+</div>
+<div class="gallery-wrap">
+  <!-- ROW 1: scrolls LEFT -->
+  <div class="gallery-row gallery-left">
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">AG Traders ERP</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Employee Self-Service</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Gym Management</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Hospital Management</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Point of Sale</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Workflow Automation</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">REST API Integration</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Bulk PDF Engine</div></div>
+    <!-- duplicate for seamless loop -->
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">AG Traders ERP</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Employee Self-Service</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Gym Management</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Hospital Management</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Point of Sale</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Workflow Automation</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">REST API Integration</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Bulk PDF Engine</div></div>
+  </div>
+  <!-- ROW 2: scrolls RIGHT -->
+  <div class="gallery-row gallery-right">
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">HOD/CEO Approval Flow</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">OCI Cloud Integration</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Security Architecture</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">ECharts Dashboards</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Retail Invoicing System</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Patient &amp; Staff Records</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Member &amp; Billing Platform</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">ORDS · REST · OCI</div></div>
+    <!-- duplicate for seamless loop -->
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">HOD/CEO Approval Flow</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">OCI Cloud Integration</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Security Architecture</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">ECharts Dashboards</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Retail Invoicing System</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Patient &amp; Staff Records</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">Member &amp; Billing Platform</div></div>
+    <div class="gallery-item" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')"><div class="gallery-item-label">ORDS · REST · OCI</div></div>
+  </div>
+</div>
+
+<!-- THOUGHTS -->
+<section id="thoughts">
+  <div class="section-inner">
+    <div class="section-label reveal">Writing</div>
+    <h2 class="section-title reveal" style="margin-bottom:2.5rem">Thoughts</h2>
+    <div class="thoughts-grid">
+      <a href="https://linkedin.com/in/rizwan0626" target="_blank" class="thought-card reveal" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')">
+        <div class="thought-date">Jan 12, 2026</div>
+        <div class="thought-title">Why Oracle APEX Still Wins for Enterprise Backends</div>
+        <div class="thought-desc">Low-code speed without giving up PL/SQL control over real business logic.</div>
+      </a>
+      <a href="https://linkedin.com/in/rizwan0626" target="_blank" class="thought-card reveal" style="background-image:url('https://i.ibb.co/JfbkpdN/Thumbnail.png')">
+        <div class="thought-date">Feb 03, 2026</div>
+        <div class="thought-title">Building Approval Workflows That Don't Break</div>
+        <div class="thought-desc">Lessons from shipping multi-level HOD/CEO routing with RBAC in production.</div>
+      </a>
+      <div class="thought-card thought-cta reveal">
+        <div class="thought-title">See how I build reliable ERP systems &mdash; explore my work</div>
+        <a href="#projects" class="view-all-dark">View All Work &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <h2 class="section-title reveal">Let's Talk.</h2>
+    <p class="reveal" style="color:var(--ink-soft);margin-top:0.6rem;font-size:0.95rem">Have a project or need help? Fill out the form — I respond within 24 hours.</p>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="contact-methods" style="margin-top:1.5rem">
+          <a href="mailto:rimalik162534@gmail.com" class="cmethod"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>rimalik162534@gmail.com<span>Email</span></a>
+          <a href="tel:+923237004270" class="cmethod"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.15a16 16 0 006.29 6.29l1.42-1.42a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>+92 323 700 4270<span>WhatsApp</span></a>
+          <a href="https://linkedin.com/in/rizwan0626" target="_blank" class="cmethod"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>linkedin.com/in/rizwan0626<span>LinkedIn</span></a>
+          <a href="https://www.upwork.com" target="_blank" class="cmethod" style="color:#14a800"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M18.561 13.158c-1.102 0-2.135-.467-3.074-1.227l.228-1.076.008-.042c.207-1.143.849-3.06 2.839-3.06 1.492 0 2.703 1.212 2.703 2.703-.001 1.489-1.212 2.702-2.704 2.702zm0-8.871c-1.894 0-3.482.91-4.44 2.541-.524.976-.764 2.081-.84 3.248l-.164 1.378c-.193 1.254-.72 2.426-1.713 3.11-.504.341-1.073.563-1.673.726V8.288H9.41v8.579c-1.102.214-2.235.33-3.343.33-2.03 0-4.067-.487-4.067-2.7 0-1.49 1.213-2.703 2.703-2.703 1.095 0 2.025.659 2.456 1.596l1.901-.814C8.43 11.148 7.161 10.25 5.703 10.25 3.662 10.25 2 11.912 2 13.953c0 3.402 3.262 4.417 6.067 4.417 1.249 0 2.495-.178 3.682-.455v2.285h2.099v-7.4c.7-.141 1.336-.385 1.918-.751 1.284-.808 2.046-2.21 2.342-3.786l.15-1.025c.07-.692.177-1.373.407-2.012.55-1.527 1.658-2.339 3.285-2.339 1.874 0 3.399 1.525 3.399 3.399 0 1.874-1.525 3.399-3.399 3.399z"/></svg>Hire on Upwork<span>Freelance</span></a>
+          <a href="https://www.fiverr.com" target="_blank" class="cmethod" style="color:#1dbf73"><svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M23.004 15.588a.995.995 0 1 0 .002-1.99.995.995 0 0 0-.002 1.99zm-.996-3.705h-1.009c-.292-4.376-3.786-7.876-8.287-8.284V2.493h-1.53v1.106C6.68 3.906 3.187 7.406 2.894 11.883H2v1.53h.887c.26 4.504 3.771 8.051 8.295 8.354v1.237h1.53V21.77c4.531-.3 8.044-3.85 8.296-8.358zm-10.51 6.833c-3.747-.271-6.711-3.242-6.983-6.832h6.983v-1.53H4.518c.274-3.567 3.23-6.538 6.98-6.838v6.837h1.53V9.514c3.75.3 6.707 3.271 6.981 6.838H13.03v1.53h6.978c-.272 3.59-3.235 6.561-6.982 6.832z"/></svg>Order on Fiverr<span>Gigs</span></a>
+        </div>
+        <div class="social-row" style="margin-top:2rem">
+          <a href="https://linkedin.com/in/rizwan0626" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="mailto:rimalik162534@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+          <a href="tel:+923237004270" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.72A2 2 0 012.18 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.15a16 16 0 006.29 6.29l1.42-1.42a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></a>
+        </div>
+      </div>
+      <div class="contact-form-panel reveal">
+        <div class="contact-form" id="contactForm">
+          <div class="form-group"><label class="form-label" for="fn">Name</label><input class="form-input" type="text" id="fn" placeholder="Enter your name" required></div>
+          <div class="form-group"><label class="form-label" for="fe">Email</label><input class="form-input" type="email" id="fe" placeholder="Enter your email" required></div>
+          <div class="form-group"><label class="form-label" for="fs">Subject</label><input class="form-input" type="text" id="fs" placeholder="Oracle APEX Project"></div>
+          <div class="form-group"><label class="form-label" for="fm">Your Project</label><textarea class="form-textarea" id="fm" placeholder="Describe your project, timeline and budget..." required></textarea></div>
+          <button class="form-submit" id="submitBtn" onclick="sendForm()">
+            <span id="submitTxt">Submit</span>
+            <span id="submitSpin" style="display:none">Sending...</span>
+          </button>
+          <div class="form-success" id="fss">&#10003; Message sent &mdash; I will respond within 24 hours.</div>
+          <div id="ferr" style="display:none;font-family:var(--display);font-size:0.82rem;color:#ff6b6b;background:rgba(255,107,107,0.1);border:1px solid rgba(255,107,107,0.25);border-radius:var(--r-sm);padding:0.9rem;text-align:center;margin-top:0.5rem">Failed to send. Please email directly: rimalik162534@gmail.com</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-headline">Building reliable<br><span class="accent">ERP systems</span><br>for growth.</div>
+      <div>
+        <div class="footer-col-label">Quick Links</div>
+        <div class="footer-pill-links">
+          <a href="#projects" class="footer-pill">Projects</a>
+          <a href="#skills" class="footer-pill">Skills</a>
+          <a href="#about" class="footer-pill">About</a>
+          <a href="#contact" class="footer-pill">Contact</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-label">Contact</div>
+        <div class="footer-links">
+          <a href="mailto:rimalik162534@gmail.com">rimalik162534@gmail.com</a>
+          <a href="tel:+923237004270">+92 323 700 4270</a>
+          <a href="https://linkedin.com/in/rizwan0626" target="_blank">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-name-bg" aria-hidden="true">
+    <span>RIZWAN</span>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-l">&#169; 2026 Muhammad Rizwan &middot; Oracle APEX Developer &middot; Faisalabad, Pakistan</div>
+    <div class="footer-social">
+      <a href="https://linkedin.com/in/rizwan0626" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+      <a href="mailto:rimalik162534@gmail.com" aria-label="Email"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+// TYPEWRITER — fixed: no layout shift on phrase transition
+const phrases=['ERP Systems Developer','Workflow Automation Engineer','REST API Integration Specialist','PDF Engine Builder · 1000+/batch','Available for Remote Contract'];
+let pi=0,ci=0,del=false,paused=false;
+const twEl=document.getElementById('tw');
+// Reserve height so empty string doesn't collapse the row
+twEl.style.minWidth='1px';
+function type(){
+  if(paused)return;
+  const cur=phrases[pi];
+  if(!del){
+    ci++;
+    twEl.textContent=cur.slice(0,ci);
+    if(ci===cur.length){del=true;setTimeout(type,2200);return;}
+    setTimeout(type,62);
+  } else {
+    if(ci>0){ci--;twEl.textContent=cur.slice(0,ci)||'\u200B';}// zero-width space prevents collapse
+    if(ci===0){
+      del=false;
+      pi=(pi+1)%phrases.length;
+      twEl.textContent='\u200B';
+      setTimeout(type,180);// brief pause before next phrase starts
+      return;
+    }
+    setTimeout(type,34);
+  }
+}
+type();
+
+// NAV DROPDOWN
+function closeNav(){document.getElementById('navDrop').classList.remove('open');}
+document.addEventListener('click',function(e){
+  const drop=document.getElementById('navDrop');
+  const pill=document.querySelector('.nav-pill');
+  if(drop.classList.contains('open') && !drop.contains(e.target) && !pill.contains(e.target)){drop.classList.remove('open');}
+});
+
+// SCROLL REVEAL
+const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');ro.unobserve(x.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// PROJECT CARDS
+const co=new IntersectionObserver(e=>{e.forEach((x,i)=>{if(x.isIntersecting){setTimeout(()=>x.target.classList.add('visible'),i*90);co.unobserve(x.target);}});},{threshold:0.08});
+document.querySelectorAll('.project-card').forEach(c=>co.observe(c));
+
+// PROJECT IMAGE SLIDERS — manual only, no auto-advance
+function setActiveSlide(media, idx){
+  const slides = media.querySelectorAll('.project-slide');
+  const dots   = media.querySelectorAll('.project-dot');
+  slides.forEach(s => s.classList.remove('active'));
+  dots.forEach(d   => d.classList.remove('active'));
+  slides[idx].classList.add('active');
+  dots[idx].classList.add('active');
+  media.dataset.current = idx;
+}
+function goToSlide(e, btn, idx){
+  e.preventDefault();
+  e.stopPropagation();
+  setActiveSlide(btn.closest('.project-media'), idx);
+}
+// init current index only — no autoplay
+document.querySelectorAll('.project-media').forEach(media => {
+  media.dataset.current = '0';
+});
+
+// ── LIGHTBOX ──────────────────────────────────────────────────────────────
+let lbImages = [], lbIdx = 0, lbStartX = 0, lbDragging = false;
+
+// Build lightbox DOM once
+const lb = document.createElement('div');
+lb.id = 'lightbox';
+lb.style.cssText = [
+  'position:fixed','inset:0','z-index:8000',
+  'background:rgba(0,0,0,0.92)','backdrop-filter:blur(12px)',
+  'display:none','flex-direction:column',
+  'align-items:center','justify-content:center',
+  'opacity:0','transition:opacity 0.3s ease'
+].join(';');
+lb.innerHTML = `
+  <button id="lb-close" aria-label="Close" style="position:absolute;top:1.1rem;right:1.25rem;background:rgba(255,255,255,0.1);border:none;color:#fff;width:40px;height:40px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;z-index:1">✕</button>
+  <div id="lb-img-wrap" style="position:relative;max-width:92vw;max-height:80vh;display:flex;align-items:center;justify-content:center;user-select:none">
+    <img loading="lazy" decoding="async" id="lb-img" src="" alt="" style="max-width:92vw;max-height:80vh;object-fit:contain;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,0.7);pointer-events:none;transition:opacity 0.25s ease">
+    <button id="lb-prev" aria-label="Previous" style="position:absolute;left:-3.5rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s">&#8592;</button>
+    <button id="lb-next" aria-label="Next"     style="position:absolute;right:-3.5rem;top:50%;transform:translateY(-50%);background:rgba(255,255,255,0.12);border:none;color:#fff;width:44px;height:44px;border-radius:50%;font-size:1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s">&#8594;</button>
+  </div>
+  <div id="lb-dots" style="display:flex;gap:6px;margin-top:1.25rem"></div>
+  <div id="lb-caption" style="margin-top:0.6rem;font-family:var(--mono,monospace);font-size:0.7rem;color:rgba(255,255,255,0.4);letter-spacing:0.1em"></div>
+`;
+document.body.appendChild(lb);
+
+function lbShow(images, startIdx){
+  lbImages = images;
+  lbIdx    = startIdx;
+  lb.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+  requestAnimationFrame(()=>{ lb.style.opacity = '1'; });
+  lbRender();
+}
+function lbHide(){
+  lb.style.opacity = '0';
+  setTimeout(()=>{ lb.style.display='none'; document.body.style.overflow=''; }, 300);
+}
+function lbRender(){
+  const img  = document.getElementById('lb-img');
+  const dots = document.getElementById('lb-dots');
+  const cap  = document.getElementById('lb-caption');
+  img.style.opacity = '0';
+  img.src = lbImages[lbIdx].src;
+  img.alt = lbImages[lbIdx].alt || '';
+  img.onload = () => { img.style.opacity = '1'; };
+  // dots
+  dots.innerHTML = '';
+  lbImages.forEach((_,i)=>{
+    const d = document.createElement('button');
+    d.style.cssText = `width:${i===lbIdx?'18px':'7px'};height:7px;border-radius:4px;background:${i===lbIdx?'#fff':'rgba(255,255,255,0.3)'};border:none;cursor:pointer;transition:width 0.25s,background 0.25s;padding:0`;
+    d.onclick = () => { lbIdx=i; lbRender(); };
+    dots.appendChild(d);
+  });
+  cap.textContent = (lbIdx+1) + ' / ' + lbImages.length;
+}
+function lbPrev(){ lbIdx = (lbIdx - 1 + lbImages.length) % lbImages.length; lbRender(); }
+function lbNext(){ lbIdx = (lbIdx + 1) % lbImages.length; lbRender(); }
+
+document.getElementById('lb-close').onclick = lbHide;
+document.getElementById('lb-prev').onclick   = lbPrev;
+document.getElementById('lb-next').onclick   = lbNext;
+lb.addEventListener('click', e => { if(e.target === lb) lbHide(); });
+
+// keyboard
+document.addEventListener('keydown', e => {
+  if(lb.style.display !== 'flex') return;
+  if(e.key === 'ArrowLeft')  lbPrev();
+  if(e.key === 'ArrowRight') lbNext();
+  if(e.key === 'Escape')     lbHide();
+});
+
+// touch swipe
+const lbWrap = document.getElementById('lb-img-wrap');
+lbWrap.addEventListener('touchstart', e => { lbStartX = e.touches[0].clientX; lbDragging = true; }, {passive:true});
+lbWrap.addEventListener('touchend',   e => {
+  if(!lbDragging) return;
+  const dx = e.changedTouches[0].clientX - lbStartX;
+  if(Math.abs(dx) > 40){ dx < 0 ? lbNext() : lbPrev(); }
+  lbDragging = false;
+});
+
+// wire each project-img — click on image area opens lightbox
+document.querySelectorAll('.project-img').forEach(imgEl => {
+  imgEl.style.cursor = 'zoom-in';
+  imgEl.addEventListener('click', e => {
+    // don't trigger if clicking a dot
+    if(e.target.classList.contains('project-dot')) return;
+    const slides = imgEl.querySelectorAll('.project-slide img');
+    const cur    = parseInt(imgEl.closest('.project-media').dataset.current || '0');
+    const images = Array.from(slides).map(i => ({src:i.src, alt:i.alt}));
+    lbShow(images, cur);
+  });
+});
+
+// CONTACT FORM — EmailJS
+// ---------------------------------------------------------------------------
+// SETUP (do this once in your EmailJS dashboard at dashboard.emailjs.com):
+//  1. Email Services  → Add Service → connect Gmail (or your support@oracleapex.me
+//     inbox if it supports SMTP) → copy the SERVICE ID it gives you.
+//  2. Email Templates → Create Template → this is the "Content" tab, the email
+//     that lands in YOUR inbox with the enquiry. Use the variables:
+//       {{name}}  {{email}}  {{title}}  {{message}}
+//     Copy this template's TEMPLATE ID.
+//  3. Same template → "Auto-Reply" tab → turn it on. This is the second email,
+//     sent automatically back to the VISITOR. To Email = {{email}}. See the
+//     ready-to-paste copy for both tabs in emailjs-templates.txt.
+//  4. Account (top right) → API Keys → copy your PUBLIC KEY.
+//  5. Paste all three below.
+// ---------------------------------------------------------------------------
+const EMAILJS_PUBLIC_KEY  = 'YOUR_EMAILJS_PUBLIC_KEY';   // Account → API Keys
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';            // Email Services tab
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';           // Email Templates tab (Content template)
+
+(function(){
+  if(typeof emailjs !== 'undefined') emailjs.init({publicKey: EMAILJS_PUBLIC_KEY});
+})();
+
+async function sendForm(){
+  const n = document.getElementById('fn').value.trim();
+  const e = document.getElementById('fe').value.trim();
+  const s = document.getElementById('fs').value.trim();
+  const m = document.getElementById('fm').value.trim();
+  if(!n||!e||!m){alert('Please fill Name, Email and Project details.');return;}
+
+  const btn = document.getElementById('submitBtn');
+  document.getElementById('submitTxt').style.display='none';
+  document.getElementById('submitSpin').style.display='inline';
+  btn.disabled=true;
+  document.getElementById('ferr').style.display='none';
+
+  // If EmailJS not configured yet — fallback to mailto
+  if(EMAILJS_PUBLIC_KEY==='YOUR_EMAILJS_PUBLIC_KEY'){
+    const body=encodeURIComponent('Name: '+n+'\nEmail: '+e+'\nSubject: '+s+'\n\n'+m);
+    window.location.href='mailto:rimalik162534@gmail.com?subject='+encodeURIComponent('Portfolio: '+(s||'New Enquiry'))+'&body='+body;
+    document.getElementById('fss').style.display='block';
+    document.getElementById('submitTxt').style.display='inline';
+    document.getElementById('submitSpin').style.display='none';
+    btn.disabled=false;
+    ['fn','fe','fs','fm'].forEach(id=>document.getElementById(id).value='');
+    return;
+  }
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      name:    n,
+      email:   e,
+      title:   s || 'Portfolio Enquiry',
+      message: m
+    });
+    document.getElementById('fss').style.display='block';
+    ['fn','fe','fs','fm'].forEach(id=>document.getElementById(id).value='');
+  } catch(err){
+    console.error('EmailJS error:',err);
+    document.getElementById('ferr').style.display='block';
+  } finally {
+    document.getElementById('submitTxt').style.display='inline';
+    document.getElementById('submitSpin').style.display='none';
+    btn.disabled=false;
+  }
+}
+
+// ── PAGE LOADER ───────────────────────────────────────────────────────────
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const loader = document.getElementById('page-loader');
+    if(loader) loader.classList.add('hidden');
+    // show floating buttons after load
+    document.querySelectorAll('.float-btn').forEach((btn, i) => {
+      setTimeout(() => btn.classList.add('ready'), 600 + i * 80);
+    });
+  }, 1500);
+});
+
+// ── ENHANCED SCROLL REVEAL ────────────────────────────────────────────────
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach((el, i) => {
+  el.style.transitionDelay = (i % 4) * 0.07 + 's';
+  revealObs.observe(el);
+});
+
+// ── SMOOTH SECTION SCROLL ─────────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</body>
+</html>
