@@ -6,6 +6,7 @@ git push -u origin main
 
 Check for Existing Links
 git remote -v
+git pull origin main
 
 
 Stage, Commit, and Push
