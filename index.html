@@ -1,1521 +1,1215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-(function(){
-  var t = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
-  document.documentElement.setAttribute('data-theme', t);
-})();
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>Muhammad Rizwan — Oracle APEX Developer</title>
-<meta name="description" content="Certified Oracle APEX Developer specializing in production ERP systems, multi-level approval workflows, and high-volume batch PDF reporting.">
+<meta name="description" content="Personal portfolio of Muhammad Rizwan, Certified Oracle APEX Developer building enterprise ERP platforms, approval workflows, and batch PDF engines.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boxing@400&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --cream:#FAFAF8;
-  --cream2:#F1F0EC;
-  --paper:#FFFFFF;
-  --ink:#121212;
-  --ink-soft:#67635A;
-  --ink-faint:#9B9689;
-  --line:rgba(18,18,18,0.12);
-  --line2:rgba(18,18,18,0.07);
-  --green:#1DBF73;
-  --green-deep:#12653F;
-  --green-dim:rgba(29,191,115,0.13);
-  --accent:var(--green);
-  --accent-deep:var(--green-deep);
-  --accent-dim:var(--green-dim);
-  --dark:#121212;
-  --dark2:#1C1C1C;
-  --r-lg:24px;
-  --r-md:16px;
-  --r-sm:10px;
-  --r-pill:999px;
-  --mono:'JetBrains Mono',monospace;
-  --display:'Space Grotesk',sans-serif;
-  --headline:'Boxing','Space Grotesk',Georgia,serif;
-  --body:'Inter',sans-serif;
-  --topbar-bg:rgba(250,250,248,0.88);
-  --card-shadow:0 10px 30px -15px rgba(18,18,18,0.1);
-}
-
-/* ============ DARK MODE ============ */
-html[data-theme="dark"]{
-  --cream:#141414;
-  --cream2:#1E1E1E;
-  --paper:#1A1A1A;
-  --ink:#F2F1EC;
-  --ink-soft:#B8B4A9;
-  --ink-faint:#7A766C;
-  --line:rgba(255,255,255,0.12);
-  --line2:rgba(255,255,255,0.06);
-  --green-deep:#2FE58B;
-  --accent:#2FE58B;
-  --accent-deep:#2FE58B;
-  --accent-dim:rgba(47,229,139,0.15);
-  --dark:#0A0A0A;
-  --dark2:#000000;
-  --topbar-bg:rgba(20,20,20,0.88);
-  --card-shadow:0 14px 34px -18px rgba(0,0,0,0.55);
-  color-scheme: dark;
+  --bg-cream:#FAF6F0;
+  --bg-sand:#F7F2ED;
+  --bg-white:#FFFFFF;
+  --text-dark:#182230;
+  --text-soft:#647082;
+  --text-muted:#94A3B8;
+  --teal:#2B696D;
+  --teal-dark:#1F5458;
+  --teal-light:#EBF3F3;
+  --yellow:#F5B738;
+  --yellow-dark:#E5A425;
+  --yellow-light:#FEF7EA;
+  --coral:#E85D4E;
+  --coral-dark:#D34636;
+  --coral-light:#FDF0EE;
+  --border:rgba(24,34,48,0.09);
+  --font-logo:'Caveat',cursive;
+  --font-heading:'Outfit',sans-serif;
+  --font-body:'Plus Jakarta Sans',sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
 }
 
 html{scroll-behavior:smooth}
 body{
-  background:var(--cream);
-  color:var(--ink);
-  font-family:var(--body);
+  background-color:var(--bg-cream);
+  color:var(--text-dark);
+  font-family:var(--font-body);
   font-size:16px;
   line-height:1.6;
   overflow-x:hidden;
   width:100%;
 }
-a{color:inherit}
-::selection{background:var(--green);color:#fff}
+a{color:inherit;text-decoration:none}
 
-/* Subtle background grid */
-body::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  background-image:
-    linear-gradient(rgba(18,18,18,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(18,18,18,0.035) 1px, transparent 1px);
-  background-size:44px 44px;
-  pointer-events:none;
-  z-index:0;
-}
-html[data-theme="dark"] body::before{
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-}
-
-/* ============ TOPBAR NAVIGATION ============ */
-.topbar{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:200;
-  display:flex;
-  justify-content:center;
-  padding:1rem 1.25rem;
-  pointer-events:none;
-}
-.topbar-inner{
-  pointer-events:auto;
-  width:100%;
+/* Container */
+.container{
   max-width:1180px;
+  margin:0 auto;
+  padding:0 2rem;
+}
+
+/* ============ HEADER ============ */
+.site-header{
+  padding:2rem 0 1rem;
+}
+.nav-wrap{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  background:var(--topbar-bg);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  border:1px solid var(--line);
-  border-radius:var(--r-pill);
-  padding:0.45rem 0.6rem 0.45rem 1.2rem;
-  box-shadow:var(--card-shadow);
+  gap:1rem;
+}
+.logo-script{
+  font-family:var(--font-logo);
+  font-size:2.4rem;
+  font-weight:700;
+  color:var(--text-dark);
+  line-height:1;
+}
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:2rem;
+}
+.nav-item{
+  font-family:var(--font-heading);
+  font-size:0.85rem;
+  font-weight:600;
+  color:var(--text-dark);
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  transition:color 0.2s;
+}
+.nav-item:hover{
+  color:var(--coral);
+}
+.nav-item.pill{
+  padding:0.4rem 1.1rem;
+  border:1.5px solid var(--text-dark);
+  border-radius:999px;
+}
+.nav-right{
+  display:flex;
+  align-items:center;
   gap:0.75rem;
 }
-.tb-mark{
-  display:flex;
-  align-items:center;
-  gap:0.55rem;
-  font-family:var(--display);
+.phone-link{
+  font-family:var(--font-heading);
+  font-size:0.88rem;
   font-weight:700;
-  font-size:0.92rem;
-  text-decoration:none;
-  color:var(--ink);
-  white-space:nowrap;
+  color:var(--text-dark);
+  letter-spacing:0.02em;
 }
-.tb-mark .dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:var(--accent);
-  box-shadow:0 0 8px var(--accent);
-  animation:pulse 2s infinite;
-  flex-shrink:0;
-}
-@keyframes pulse{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:0.4;transform:scale(0.8)}
-}
-.tb-links{
-  display:flex;
-  align-items:center;
-  gap:0.35rem;
-}
-.tb-link{
-  font-family:var(--display);
-  font-weight:600;
-  font-size:0.84rem;
-  color:var(--ink-soft);
-  text-decoration:none;
-  padding:0.45rem 0.8rem;
-  border-radius:var(--r-pill);
-  transition:background 0.2s, color 0.2s;
-  white-space:nowrap;
-}
-.tb-link:hover{
-  background:var(--cream2);
-  color:var(--ink);
-}
-.tb-btn-contact{
-  font-family:var(--display);
-  font-weight:700;
-  font-size:0.82rem;
-  color:#fff;
-  background:var(--dark);
-  padding:0.55rem 1.1rem;
-  border-radius:var(--r-pill);
-  text-decoration:none;
-  display:inline-flex;
-  align-items:center;
-  gap:0.45rem;
-  white-space:nowrap;
-  transition:background 0.2s, transform 0.15s;
-}
-html[data-theme="dark"] .tb-btn-contact{
-  background:var(--green);
-  color:#08150E;
-}
-.tb-btn-contact:hover{
-  background:var(--green-deep);
-  color:#fff;
-  transform:translateY(-1px);
-}
-.theme-toggle{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--ink-soft);
-  background:none;
-  border:none;
-  cursor:pointer;
-  transition:background 0.2s, color 0.2s;
-  font-size:0.95rem;
-  flex-shrink:0;
-}
-.theme-toggle:hover{
-  background:var(--cream2);
-  color:var(--ink);
-}
-.theme-toggle .fa-sun{display:none}
-html[data-theme="dark"] .theme-toggle .fa-sun{display:inline}
-html[data-theme="dark"] .theme-toggle .fa-moon{display:none}
-
-.tb-hamburger{
-  display:none;
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  align-items:center;
-  justify-content:center;
-  color:var(--ink);
-  background:none;
-  border:none;
-  cursor:pointer;
-  font-size:1.05rem;
-  flex-shrink:0;
-}
-
-/* Mobile dropdown */
-.mobile-nav-menu{
-  display:none;
-  position:fixed;
-  top:4.8rem;
-  left:1.25rem;
-  right:1.25rem;
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:var(--r-md);
-  padding:0.9rem;
-  flex-direction:column;
-  gap:0.35rem;
-  box-shadow:0 20px 45px rgba(0,0,0,0.2);
-  z-index:199;
-}
-.mobile-nav-menu.open{
-  display:flex;
-}
-.mobile-nav-menu a{
-  font-family:var(--display);
-  font-size:0.92rem;
-  font-weight:600;
-  color:var(--ink);
-  text-decoration:none;
-  padding:0.7rem 1rem;
-  border-radius:8px;
-  transition:background 0.2s;
-}
-.mobile-nav-menu a:hover{
-  background:var(--cream2);
-}
-.mobile-nav-menu .mob-cta{
-  background:var(--green);
-  color:#08150E;
-  font-weight:700;
-  text-align:center;
-  margin-top:0.35rem;
-}
-
-/* ============ HERO SECTION ============ */
-.hero{
-  position:relative;
-  z-index:1;
-  max-width:1180px;
-  margin:0 auto;
-  padding:7.5rem 1.5rem 2.5rem;
-  text-align:center;
-}
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:0.6rem;
-  font-family:var(--mono);
-  font-size:0.75rem;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:var(--accent-deep);
-  background:var(--accent-dim);
-  padding:0.4rem 1rem;
-  border-radius:var(--r-pill);
-  margin-bottom:1.5rem;
-  max-width:100%;
-  line-height:1.4;
-}
-.eyebrow::before{
-  content:'';
-  display:inline-block;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--accent);
-  flex-shrink:0;
-}
-.hero-title{
-  font-family:var(--headline);
-  font-weight:400;
-  font-size:clamp(1.95rem, 6.2vw, 4.4rem);
-  line-height:1.02;
-  letter-spacing:-0.02em;
-  text-transform:uppercase;
-  max-width:920px;
-  margin:0 auto 1.4rem;
-  overflow-wrap:break-word;
-  word-break:normal;
-}
-.hero-title em{
-  font-style:normal;
-  color:var(--accent-deep);
-}
-html[data-theme="dark"] .hero-title em{
-  color:var(--accent, #2FE58B);
-}
-.hero-lede{
-  font-family:var(--body);
-  font-size:clamp(0.98rem, 2.2vw, 1.15rem);
-  color:var(--ink-soft);
-  max-width:54ch;
-  margin:0 auto 1.8rem;
-  line-height:1.7;
-}
-.hero-lede strong{
-  color:var(--ink);
-  font-weight:600;
-}
-
-.typewriter-badge{
-  display:inline-flex;
-  align-items:center;
-  gap:0.5rem;
-  font-family:var(--mono);
-  font-size:0.84rem;
-  font-weight:600;
-  color:var(--ink);
-  background:var(--paper);
-  border:1px solid var(--line);
-  padding:0.5rem 1.1rem;
-  border-radius:var(--r-pill);
-  margin-bottom:2rem;
-  max-width:100%;
-  box-shadow:0 4px 12px rgba(0,0,0,0.03);
-}
-.cursor{
-  display:inline-block;
-  width:2px;
-  height:1.1em;
-  background:var(--accent);
-  animation:blink 1s step-end infinite;
-  vertical-align:middle;
-}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-
-.hero-actions{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:0.85rem;
-  flex-wrap:wrap;
-  margin-bottom:3.2rem;
-}
-.btn-primary{
-  display:inline-flex;
-  align-items:center;
-  gap:0.5rem;
-  font-family:var(--display);
-  font-weight:700;
-  font-size:0.9rem;
-  color:#fff;
-  background:var(--dark);
-  padding:0.85rem 1.6rem;
-  border-radius:var(--r-pill);
-  text-decoration:none;
-  transition:background 0.2s, transform 0.15s;
-}
-.btn-primary:hover{
-  background:var(--green-deep);
-  transform:translateY(-1px);
-}
-.btn-accent{
-  display:inline-flex;
-  align-items:center;
-  gap:0.5rem;
-  font-family:var(--display);
-  font-weight:700;
-  font-size:0.9rem;
-  color:#08150E;
-  background:var(--green);
-  padding:0.85rem 1.6rem;
-  border-radius:var(--r-pill);
-  text-decoration:none;
-  transition:background 0.2s, transform 0.15s;
-}
-.btn-accent:hover{
-  background:#22d17f;
-  transform:translateY(-1px);
-}
-
-.social-pills{
-  display:flex;
-  align-items:center;
-  gap:0.5rem;
-}
-.social-pill{
+.phone-circle{
   width:40px;
   height:40px;
   border-radius:50%;
-  border:1px solid var(--line);
-  background:var(--paper);
-  color:var(--ink-soft);
+  background:#fff;
+  border:1px solid rgba(24,34,48,0.1);
   display:flex;
   align-items:center;
   justify-content:center;
-  text-decoration:none;
-  font-size:0.95rem;
-  transition:background 0.2s, color 0.2s, border-color 0.2s;
+  color:var(--teal);
+  box-shadow:0 4px 12px rgba(0,0,0,0.04);
+  transition:transform 0.2s, background 0.2s;
 }
-.social-pill:hover{
-  border-color:var(--green);
-  color:var(--green);
-  background:var(--green-dim);
+.phone-circle:hover{
+  background:var(--teal);
+  color:#fff;
+  transform:scale(1.05);
+}
+.mobile-btn{
+  display:none;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  background:#fff;
+  border:1px solid rgba(24,34,48,0.1);
+  align-items:center;
+  justify-content:center;
+  font-size:1.1rem;
+  cursor:pointer;
+  color:var(--text-dark);
 }
 
-/* Hero stats */
-.hero-stats{
+/* ============ HERO SECTION ============ */
+.hero-section{
+  padding:3.5rem 0 5rem;
+  position:relative;
+}
+.hero-grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1rem;
-  max-width:1080px;
-  margin:0 auto;
-  padding-top:2.2rem;
-  border-top:1px solid var(--line);
+  grid-template-columns:1fr 1.15fr 1fr;
+  align-items:center;
+  gap:2rem;
 }
-.stat-box{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:var(--r-md);
-  padding:1.4rem 1rem;
-  text-align:center;
+
+/* Left Hero */
+.hero-left{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
 }
-.stat-num{
-  font-family:var(--display);
-  font-size:clamp(1.8rem, 4vw, 2.4rem);
-  font-weight:700;
-  line-height:1;
-  color:var(--ink);
-  margin-bottom:0.35rem;
+.hero-headline{
+  font-family:var(--font-heading);
+  font-size:clamp(2.8rem, 5.5vw, 4.2rem);
+  font-weight:800;
+  line-height:1.06;
+  color:var(--text-dark);
+  letter-spacing:-0.03em;
+  margin-bottom:1.8rem;
 }
-.stat-num span{
-  color:var(--accent);
-}
-.stat-label{
-  font-family:var(--mono);
-  font-size:0.68rem;
+.hero-email{
+  font-family:var(--font-body);
+  font-size:1.02rem;
   font-weight:600;
+  color:var(--coral);
+  text-decoration:underline;
+  text-underline-offset:4px;
+  margin-bottom:4rem;
+  transition:color 0.2s;
+}
+.hero-email:hover{
+  color:var(--coral-dark);
+}
+.hero-exp-block{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+}
+.exp-large-num{
+  font-family:var(--font-heading);
+  font-size:3.6rem;
+  font-weight:800;
+  line-height:1;
+  color:var(--text-dark);
+}
+.exp-labels{
+  font-family:var(--font-heading);
+  font-size:0.75rem;
+  font-weight:700;
+  color:var(--text-soft);
   letter-spacing:0.08em;
   text-transform:uppercase;
-  color:var(--ink-soft);
+  line-height:1.35;
 }
 
-/* ============ SECTION BASICS ============ */
-section{
+/* Center Hero Avatar */
+.hero-center{
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+.hero-splash-bg{
+  position:absolute;
+  width:125%;
+  height:125%;
+  top:-12%;
+  left:-12%;
+  z-index:0;
+  pointer-events:none;
+}
+.hero-avatar-wrap{
   position:relative;
   z-index:1;
-  padding:4.5rem 1.5rem;
-}
-.section-inner{
-  max-width:1180px;
-  margin:0 auto;
-}
-.section-head{
-  margin-bottom:2.6rem;
-}
-.section-label{
-  display:inline-flex;
-  align-items:center;
-  gap:0.5rem;
-  font-family:var(--mono);
-  font-size:0.72rem;
-  letter-spacing:0.14em;
-  text-transform:uppercase;
-  color:var(--accent-deep);
-  margin-bottom:0.6rem;
-}
-.section-label::before{
-  content:'';
-  display:inline-block;
-  width:18px;
-  height:1px;
-  background:var(--accent-deep);
-}
-.section-title{
-  font-family:var(--headline);
-  font-size:clamp(1.8rem, 4vw, 2.8rem);
-  font-weight:400;
-  line-height:1.06;
-  letter-spacing:-0.02em;
-  text-transform:uppercase;
-  overflow-wrap:break-word;
-}
-.section-sub{
-  font-size:0.95rem;
-  color:var(--ink-soft);
-  max-width:560px;
-  margin-top:0.6rem;
-  line-height:1.65;
-}
-
-/* ============ SERVICES (4-GRID) ============ */
-.services-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:1.4rem;
-}
-.service-card{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:var(--r-lg);
-  padding:2rem;
+  width:320px;
+  max-width:100%;
+  aspect-ratio:1/1.22;
+  border-radius:240px 240px 40px 40px;
+  overflow:hidden;
   display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  transition:border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-}
-.service-card:hover{
-  border-color:var(--green);
-  transform:translateY(-2px);
-  box-shadow:var(--card-shadow);
-}
-.service-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  margin-bottom:1.2rem;
-}
-.service-num{
-  font-family:var(--mono);
-  font-size:0.72rem;
-  font-weight:600;
-  color:var(--accent-deep);
-}
-.service-icon{
-  width:42px;
-  height:42px;
-  border-radius:var(--r-sm);
-  background:var(--cream2);
-  color:var(--accent-deep);
-  display:flex;
-  align-items:center;
+  align-items:flex-end;
   justify-content:center;
-  font-size:1.15rem;
-  transition:background 0.2s, color 0.2s;
+  background:linear-gradient(180deg, #FAD678 0%, #F5B738 100%);
+  box-shadow:0 24px 60px -20px rgba(43,105,109,0.35);
 }
-.service-card:hover .service-icon{
-  background:var(--green);
-  color:#08150E;
-}
-.service-title{
-  font-family:var(--display);
-  font-size:1.25rem;
-  font-weight:700;
-  margin-bottom:0.6rem;
-}
-.service-desc{
-  font-size:0.9rem;
-  color:var(--ink-soft);
-  line-height:1.65;
-}
-.service-pills{
-  display:flex;
-  flex-wrap:wrap;
-  gap:0.4rem;
-  margin-top:1.4rem;
-  padding-top:1rem;
-  border-top:1px solid var(--line2);
-}
-.service-pill{
-  font-family:var(--mono);
-  font-size:0.68rem;
-  color:var(--ink-soft);
-  background:var(--cream2);
-  border:1px solid var(--line);
-  padding:0.25rem 0.6rem;
-  border-radius:var(--r-pill);
-}
-
-/* ============ PROJECTS GRID (5 PRODUCTION SYSTEMS) ============ */
-.projects-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:1.6rem;
-}
-.project-card{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:var(--r-lg);
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  transition:border-color 0.2s, box-shadow 0.2s, transform 0.2s;
-}
-.project-card:hover{
-  border-color:var(--green);
-  transform:translateY(-3px);
-  box-shadow:var(--card-shadow);
-}
-.project-card.featured{
-  grid-column:1 / -1;
-  display:grid;
-  grid-template-columns:1.2fr 1fr;
-}
-.project-media-wrap{
-  aspect-ratio:16/10;
-  background:var(--dark);
-  position:relative;
-  overflow:hidden;
-  border-bottom:1px solid var(--line);
-}
-.project-card.featured .project-media-wrap{
-  aspect-ratio:auto;
-  border-bottom:none;
-  border-right:1px solid var(--line);
-}
-.project-media-wrap img{
+.hero-avatar-img{
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
-  transition:transform 0.35s ease;
 }
-.project-card:hover .project-media-wrap img{
-  transform:scale(1.02);
-}
-.project-mockup{
-  width:100%;
-  height:100%;
-  min-height:200px;
+
+/* Right Hero */
+.hero-right{
   display:flex;
   flex-direction:column;
+  align-items:flex-end;
+  text-align:right;
+  gap:5.5rem;
+}
+.hero-quote{
+  font-size:1.05rem;
+  color:var(--text-dark);
+  font-weight:500;
+  max-width:280px;
+  line-height:1.6;
+}
+.hero-cert-badge{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  gap:0.75rem;
+  width:180px;
+}
+.cert-seal{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  border:2px dashed var(--text-dark);
+  display:flex;
   align-items:center;
   justify-content:center;
-  background:linear-gradient(135deg, var(--dark2), var(--dark));
-  color:#fff;
-  padding:1.5rem;
-  text-align:center;
+  font-size:1.8rem;
+  color:var(--teal);
+  background:#fff;
+  box-shadow:0 8px 24px rgba(0,0,0,0.06);
 }
-.project-mockup i{
-  font-size:2.6rem;
-  color:var(--accent);
-  margin-bottom:0.7rem;
-}
-.project-body{
-  padding:1.8rem;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  flex:1;
-}
-.project-eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:0.4rem;
-  font-family:var(--mono);
-  font-size:0.68rem;
-  font-weight:600;
-  letter-spacing:0.08em;
+.cert-text{
+  font-family:var(--font-heading);
+  font-size:0.72rem;
+  font-weight:800;
+  letter-spacing:0.1em;
   text-transform:uppercase;
-  color:var(--accent-deep);
-  margin-bottom:0.5rem;
-}
-.project-name{
-  font-family:var(--display);
-  font-size:1.35rem;
-  font-weight:700;
-  margin-bottom:0.55rem;
-}
-.project-desc{
-  font-size:0.88rem;
-  color:var(--ink-soft);
-  line-height:1.65;
-  margin-bottom:1.4rem;
-}
-.project-btn{
-  display:inline-flex;
-  align-items:center;
-  gap:0.45rem;
-  font-family:var(--display);
-  font-size:0.84rem;
-  font-weight:700;
-  color:var(--ink);
-  text-decoration:none;
-  padding:0.6rem 1.1rem;
-  background:var(--cream2);
-  border-radius:var(--r-pill);
-  width:fit-content;
-  transition:background 0.2s, color 0.2s;
-}
-.project-card:hover .project-btn{
-  background:var(--green);
-  color:#08150E;
+  color:var(--text-dark);
+  line-height:1.4;
 }
 
-/* ============ STACK CATEGORIES ============ */
-#skills{
-  background:var(--cream2);
-  border-radius:var(--r-lg);
-  max-width:1180px;
-  margin:0 auto;
-  padding:4rem 2.2rem;
+/* ============ "WHAT DO I HELP?" SECTION ============ */
+.help-section{
+  background:var(--bg-white);
+  padding:6.5rem 0;
+  position:relative;
+  z-index:2;
 }
-.stack-grid{
+.help-grid{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:1.6rem;
-  margin-top:2rem;
-}
-.stack-card{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:var(--r-md);
-  padding:1.6rem 1.8rem;
-}
-.stack-title{
-  font-family:var(--display);
-  font-size:1.05rem;
-  font-weight:700;
-  margin-bottom:1rem;
-  display:flex;
+  grid-template-columns:1fr 1.2fr;
+  gap:4.5rem;
   align-items:center;
-  gap:0.5rem;
 }
-.stack-title i{
-  color:var(--accent);
-}
-.stack-tags{
-  display:flex;
-  flex-wrap:wrap;
-  gap:0.45rem;
-}
-.stack-tag{
-  font-family:var(--display);
-  font-size:0.8rem;
-  font-weight:600;
-  color:var(--ink);
-  background:var(--cream);
-  border:1px solid var(--line);
-  padding:0.4rem 0.85rem;
-  border-radius:var(--r-pill);
-  display:inline-flex;
-  align-items:center;
-  gap:0.4rem;
-}
-.stack-tag i{
-  color:var(--accent);
-  font-size:0.85rem;
-}
-
-/* ============ EXPERIENCE TIMELINE ============ */
-.timeline{
-  position:relative;
-  max-width:760px;
-  margin:2.5rem auto 0;
-  padding-left:2rem;
-}
-.timeline::before{
-  content:'';
-  position:absolute;
-  left:5px;
-  top:8px;
-  bottom:8px;
-  width:2px;
-  background:var(--line);
-}
-.timeline-item{
-  position:relative;
-  margin-bottom:2.2rem;
-}
-.timeline-item:last-child{margin-bottom:0}
-.timeline-dot{
-  position:absolute;
-  left:-2rem;
-  top:6px;
-  width:12px;
-  height:12px;
-  border-radius:50%;
-  background:var(--green);
-  border:3px solid var(--cream);
-}
-.timeline-card{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:var(--r-md);
-  padding:1.5rem 1.7rem;
-}
-.timeline-date{
-  font-family:var(--mono);
-  font-size:0.68rem;
-  font-weight:600;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  color:var(--accent-deep);
-  margin-bottom:0.4rem;
-}
-.timeline-role{
-  font-family:var(--display);
-  font-weight:700;
-  font-size:1.15rem;
-}
-.timeline-company{
-  font-size:0.88rem;
-  color:var(--ink-soft);
-  margin-bottom:0.75rem;
-}
-.timeline-list{
-  padding-left:1.1rem;
+.help-cards{
   display:flex;
   flex-direction:column;
-  gap:0.3rem;
+  gap:1.25rem;
 }
-.timeline-list li{
-  font-size:0.85rem;
-  color:var(--ink-soft);
-  line-height:1.6;
+.help-card{
+  background:#fff;
+  border-radius:24px;
+  padding:1.6rem 2rem;
+  display:flex;
+  align-items:center;
+  gap:1.5rem;
+  box-shadow:0 14px 40px -15px rgba(24,34,48,0.08);
+  border:1px solid rgba(24,34,48,0.05);
+  transition:transform 0.25s, box-shadow 0.25s;
 }
+.help-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 20px 45px -15px rgba(24,34,48,0.12);
+}
+.help-icon-circle{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.4rem;
+  color:#fff;
+  flex-shrink:0;
+}
+.help-icon-circle.teal{background:var(--teal)}
+.help-icon-circle.yellow{background:var(--yellow)}
+.help-icon-circle.coral{background:var(--coral)}
 
-/* ============ DEDICATED CALL TO ACTION SECTION ============ */
-#contact{
-  max-width:1180px;
-  margin:1rem auto 0;
-  background:var(--dark);
-  border-radius:var(--r-lg);
-  padding:3.2rem 2.5rem;
-  color:#fff;
-}
-.contact-grid{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:2rem;
-}
-.contact-title{
-  font-family:var(--headline);
-  font-size:clamp(1.6rem,3.2vw,2.4rem);
-  text-transform:uppercase;
-  font-weight:400;
-  letter-spacing:-0.01em;
-  line-height:1.1;
-}
-.contact-title em{
-  font-style:normal;
-  color:var(--green);
-}
-.contact-sub{
-  font-family:var(--body);
-  font-size:0.92rem;
-  color:rgba(255,255,255,0.6);
-  margin-top:0.6rem;
-  max-width:46ch;
-  line-height:1.65;
-}
-.contact-actions{
-  display:flex;
-  flex-wrap:wrap;
-  gap:0.7rem;
-}
-.contact-pill{
-  font-family:var(--display);
-  font-size:0.84rem;
-  font-weight:600;
-  color:#fff;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.16);
-  padding:0.75rem 1.3rem;
-  border-radius:var(--r-pill);
-  text-decoration:none;
-  display:inline-flex;
-  align-items:center;
-  gap:0.55rem;
-  transition:background 0.2s;
-  white-space:nowrap;
-}
-.contact-pill:hover{
-  background:rgba(255,255,255,0.16);
-}
-.contact-pill.green{
-  background:var(--green);
-  color:#08150E;
-  border-color:var(--green);
+.help-card-info h4{
+  font-family:var(--font-heading);
+  font-size:1.25rem;
   font-weight:700;
+  margin-bottom:0.25rem;
+  color:var(--text-dark);
 }
-.contact-pill.green:hover{
-  background:#22d17f;
+.help-card-info p{
+  font-size:0.86rem;
+  color:var(--text-soft);
+  font-weight:500;
 }
 
-/* ============ FOOTER ============ */
-footer{
-  background:var(--dark);
-  color:#fff;
-  padding:4rem 1.5rem 2rem;
+.help-content h2{
+  font-family:var(--font-heading);
+  font-size:clamp(2.4rem, 4.5vw, 3.4rem);
+  font-weight:800;
+  line-height:1.1;
+  color:var(--text-dark);
+  letter-spacing:-0.025em;
+  margin-bottom:1.6rem;
+}
+.help-content .help-p{
+  font-size:1.02rem;
+  color:var(--text-soft);
+  line-height:1.75;
+  margin-bottom:1.2rem;
+}
+.help-stats{
+  display:flex;
+  align-items:center;
+  gap:4.5rem;
   margin-top:2.5rem;
 }
-.footer-inner{
-  max-width:1180px;
-  margin:0 auto;
+.h-stat-num{
+  font-family:var(--font-heading);
+  font-size:2.8rem;
+  font-weight:800;
+  color:var(--text-dark);
+  line-height:1;
+  margin-bottom:0.35rem;
 }
-.footer-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-start;
-  flex-wrap:wrap;
-  gap:2rem;
-  padding-bottom:2.5rem;
-  border-bottom:1px solid rgba(255,255,255,0.1);
-}
-.footer-name{
-  font-family:var(--display);
-  font-size:1.3rem;
-  font-weight:700;
-  margin-bottom:0.4rem;
-}
-.footer-name span{
-  color:var(--green);
-}
-.footer-tag{
-  font-size:0.86rem;
-  color:rgba(255,255,255,0.55);
-  max-width:380px;
-  line-height:1.6;
-}
-.footer-actions{
-  display:flex;
-  align-items:center;
-  gap:0.6rem;
-  flex-wrap:wrap;
-}
-.footer-pill{
-  font-family:var(--display);
-  font-size:0.8rem;
+.h-stat-label{
+  font-family:var(--font-heading);
+  font-size:0.84rem;
   font-weight:600;
-  color:#fff;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.16);
-  padding:0.55rem 1rem;
-  border-radius:var(--r-pill);
-  text-decoration:none;
-  display:inline-flex;
+  color:var(--text-soft);
+}
+
+/* ============ "MY WORK EXPERIENCE" ============ */
+.exp-section{
+  background:var(--bg-sand);
+  padding:6.5rem 0;
+}
+.section-center-head{
+  text-align:center;
+  margin-bottom:4rem;
+}
+.section-center-head h2{
+  font-family:var(--font-heading);
+  font-size:clamp(2.2rem, 4vw, 3.2rem);
+  font-weight:800;
+  letter-spacing:-0.02em;
+  color:var(--text-dark);
+}
+.timeline-wrap{
+  max-width:920px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:2.8rem;
+  position:relative;
+}
+.timeline-row{
+  display:grid;
+  grid-template-columns:1fr 40px 1.8fr;
+  align-items:flex-start;
+  gap:1.5rem;
+  position:relative;
+}
+.tl-left{
+  text-align:right;
+  padding-top:0.2rem;
+}
+.tl-company{
+  font-family:var(--font-heading);
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--text-dark);
+  margin-bottom:0.25rem;
+}
+.tl-date{
+  font-family:var(--font-body);
+  font-size:0.82rem;
+  font-weight:600;
+  color:var(--text-muted);
+}
+.tl-mid{
+  display:flex;
+  flex-direction:column;
   align-items:center;
-  gap:0.45rem;
+  position:relative;
+  height:100%;
 }
-.footer-pill:hover{
-  background:var(--green);
-  color:#08150E;
+.tl-dot{
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#fff;
+  border:4px solid var(--teal);
+  box-shadow:0 0 0 4px rgba(43,105,109,0.15);
+  position:relative;
+  z-index:2;
+  flex-shrink:0;
+  margin-top:0.4rem;
 }
-.footer-bottom{
+.tl-dot.coral{border-color:var(--coral);box-shadow:0 0 0 4px rgba(232,93,78,0.15)}
+.tl-dot.yellow{border-color:var(--yellow);box-shadow:0 0 0 4px rgba(245,183,56,0.15)}
+.tl-line{
+  position:absolute;
+  top:24px;
+  bottom:-45px;
+  width:2px;
+  background:rgba(24,34,48,0.12);
+  z-index:1;
+}
+.timeline-row:last-child .tl-line{display:none}
+.tl-right{
+  padding-top:0.1rem;
+}
+.tl-role{
+  font-family:var(--font-heading);
+  font-size:1.25rem;
+  font-weight:700;
+  color:var(--text-dark);
+  margin-bottom:0.6rem;
+}
+.tl-desc{
+  font-size:0.92rem;
+  color:var(--text-soft);
+  line-height:1.7;
+}
+
+/* ============ "MY LATEST WORKS" ============ */
+.works-section{
+  background:var(--bg-sand);
+  padding:2rem 0 6.5rem;
+}
+.works-head{
   display:flex;
   justify-content:space-between;
-  align-items:center;
+  align-items:flex-end;
+  margin-bottom:3.5rem;
   flex-wrap:wrap;
   gap:1rem;
-  padding-top:1.8rem;
-  font-family:var(--mono);
-  font-size:0.72rem;
-  color:rgba(255,255,255,0.4);
+}
+.works-head h2{
+  font-family:var(--font-heading);
+  font-size:clamp(2.2rem, 4vw, 3.2rem);
+  font-weight:800;
+  color:var(--text-dark);
+  letter-spacing:-0.02em;
+}
+.works-head p{
+  font-size:0.95rem;
+  color:var(--text-soft);
+  margin-top:0.4rem;
+}
+.works-explore-link{
+  font-family:var(--font-heading);
+  font-size:0.9rem;
+  font-weight:700;
+  color:var(--coral);
+  display:inline-flex;
+  align-items:center;
+  gap:0.4rem;
+  transition:gap 0.2s;
+}
+.works-explore-link:hover{
+  gap:0.65rem;
+}
+.works-cards-row{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:2rem;
+}
+.work-card{
+  border-radius:28px;
+  padding:2.2rem 1.8rem 1.6rem;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  min-height:430px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:0 20px 45px -15px rgba(24,34,48,0.18);
+  transition:transform 0.3s ease, box-shadow 0.3s ease;
+}
+.work-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 26px 55px -15px rgba(24,34,48,0.25);
+}
+.work-card.card-yellow{
+  background:linear-gradient(150deg, #F9BE3E 0%, #E9A323 100%);
+}
+.work-card.card-teal{
+  background:linear-gradient(150deg, #327579 0%, #20565A 100%);
+}
+.work-card.card-coral{
+  background:linear-gradient(150deg, #E96556 0%, #CB4233 100%);
+}
+.work-card-top{
+  margin-bottom:1.5rem;
+  position:relative;
+  z-index:2;
+}
+.work-card-title{
+  font-family:var(--font-heading);
+  font-size:1.6rem;
+  font-weight:800;
+  line-height:1.15;
+  margin-bottom:0.35rem;
+}
+.work-card-sub{
+  font-size:0.86rem;
+  opacity:0.9;
+  font-weight:500;
+}
+.work-card-preview{
+  width:100%;
+  height:220px;
+  border-radius:18px;
+  overflow:hidden;
+  background:rgba(255,255,255,0.15);
+  backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,0.25);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  box-shadow:0 12px 30px rgba(0,0,0,0.1);
+}
+.work-card-preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.work-card-btn{
+  margin-top:1.4rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.5rem;
+  background:#fff;
+  color:var(--text-dark);
+  font-family:var(--font-heading);
+  font-size:0.84rem;
+  font-weight:700;
+  padding:0.75rem 1.4rem;
+  border-radius:999px;
+  width:100%;
+  transition:background 0.2s, color 0.2s;
+}
+.work-card:hover .work-card-btn{
+  background:var(--text-dark);
+  color:#fff;
 }
 
-/* ============ STRICT RESPONSIVE RULES (NO OVERFLOW) ============ */
+/* ============ "PEOPLE TALK ABOUT US" ============ */
+.testimonials-section{
+  background:var(--bg-sand);
+  padding:3rem 0 6.5rem;
+  text-align:center;
+}
+.testimonials-section h2{
+  font-family:var(--font-heading);
+  font-size:clamp(2.2rem, 4vw, 3.2rem);
+  font-weight:800;
+  color:var(--text-dark);
+  letter-spacing:-0.02em;
+  margin-bottom:0.5rem;
+}
+.testimonials-section .test-sub{
+  font-size:0.95rem;
+  color:var(--text-soft);
+  max-width:540px;
+  margin:0 auto 3.5rem;
+}
+.test-cards-row{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:1.8rem;
+  align-items:stretch;
+}
+.test-card{
+  background:#fff;
+  border-radius:24px;
+  padding:2.2rem 2rem;
+  box-shadow:0 14px 40px -15px rgba(24,34,48,0.06);
+  border:1px solid rgba(24,34,48,0.05);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  text-align:left;
+}
+.test-avatar{
+  width:48px;
+  height:48px;
+  border-radius:50%;
+  margin-bottom:1.4rem;
+  background:var(--teal-light);
+  color:var(--teal);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.15rem;
+  font-weight:700;
+}
+.test-avatar.y{background:var(--yellow-light);color:var(--yellow-dark)}
+.test-avatar.c{background:var(--coral-light);color:var(--coral)}
+.test-quote{
+  font-size:0.94rem;
+  color:var(--text-dark);
+  line-height:1.7;
+  font-weight:500;
+  margin-bottom:1.5rem;
+}
+.test-author{
+  font-family:var(--font-heading);
+  font-size:1.05rem;
+  font-weight:700;
+  color:var(--text-dark);
+}
+.test-role{
+  font-size:0.78rem;
+  color:var(--text-muted);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+}
+
+/* ============ CALL TO ACTION & FOOTER ============ */
+.cta-footer-section{
+  background:var(--bg-sand);
+  padding:4rem 0 3rem;
+  border-top:1px solid rgba(24,34,48,0.08);
+}
+.cta-footer-top{
+  display:grid;
+  grid-template-columns:1.4fr 1fr;
+  gap:4rem;
+  margin-bottom:4rem;
+  align-items:flex-start;
+}
+.cta-big-text h2{
+  font-family:var(--font-heading);
+  font-size:clamp(2.4rem, 5vw, 3.8rem);
+  font-weight:800;
+  line-height:1.1;
+  color:var(--text-dark);
+  letter-spacing:-0.025em;
+  margin-bottom:2rem;
+}
+.cta-say-hi{
+  font-family:var(--font-heading);
+  font-size:1.35rem;
+  font-weight:700;
+  color:var(--text-dark);
+}
+.cta-say-hi a{
+  color:var(--coral);
+  text-decoration:underline;
+  text-underline-offset:6px;
+  transition:color 0.2s;
+}
+.cta-say-hi a:hover{
+  color:var(--coral-dark);
+}
+
+.footer-info h4{
+  font-family:var(--font-heading);
+  font-size:1.15rem;
+  font-weight:700;
+  margin-bottom:1rem;
+  color:var(--text-dark);
+}
+.footer-info p{
+  font-size:0.92rem;
+  color:var(--text-soft);
+  line-height:1.7;
+  margin-bottom:1.4rem;
+}
+.footer-nav-pills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:0.8rem;
+}
+.f-pill{
+  font-family:var(--font-heading);
+  font-size:0.82rem;
+  font-weight:600;
+  color:var(--text-dark);
+  text-transform:uppercase;
+  letter-spacing:0.04em;
+  transition:color 0.2s;
+}
+.f-pill:hover{
+  color:var(--coral);
+}
+.f-pill.boxed{
+  padding:0.35rem 0.9rem;
+  border:1.5px solid var(--text-dark);
+  border-radius:999px;
+}
+
+.footer-bottom-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding-top:2.5rem;
+  border-top:1px solid rgba(24,34,48,0.08);
+  flex-wrap:wrap;
+  gap:1rem;
+}
+.fb-left{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  font-size:0.85rem;
+  color:var(--text-soft);
+}
+.fb-left .logo-script{
+  font-size:2rem;
+}
+.fb-right{
+  font-size:0.85rem;
+  color:var(--text-muted);
+}
+
+/* ============ MOBILE NAV DROPDOWN ============ */
+.mobile-menu{
+  display:none;
+  position:fixed;
+  top:5.5rem;
+  left:1.5rem;
+  right:1.5rem;
+  background:#fff;
+  border-radius:20px;
+  padding:1.4rem;
+  box-shadow:0 20px 50px rgba(0,0,0,0.15);
+  border:1px solid rgba(24,34,48,0.08);
+  flex-direction:column;
+  gap:0.8rem;
+  z-index:999;
+}
+.mobile-menu.open{
+  display:flex;
+}
+.mobile-menu a{
+  font-family:var(--font-heading);
+  font-size:1rem;
+  font-weight:700;
+  color:var(--text-dark);
+  padding:0.6rem 0.8rem;
+}
+
+/* ============ RESPONSIVE ============ */
 @media(max-width:1024px){
-  .project-card.featured{grid-template-columns:1fr}
-  .project-card.featured .project-media-wrap{aspect-ratio:16/10;border-right:none;border-bottom:1px solid var(--line)}
-  .services-grid,.stack-grid{grid-template-columns:1fr}
+  .hero-grid{grid-template-columns:1fr;text-align:center;gap:3rem}
+  .hero-left{align-items:center}
+  .hero-right{align-items:center;text-align:center;gap:3rem}
+  .help-grid{grid-template-columns:1fr;gap:3rem}
+  .works-cards-row{grid-template-columns:1fr}
+  .test-cards-row{grid-template-columns:1fr}
+  .cta-footer-top{grid-template-columns:1fr;gap:2.5rem}
 }
-
 @media(max-width:768px){
-  .tb-links{display:none}
-  .tb-hamburger{display:flex}
-  .hero{padding:6.2rem 1.25rem 2rem}
-  .hero-stats{grid-template-columns:repeat(2,1fr)}
-  .projects-grid{grid-template-columns:1fr}
-  #skills{padding:3rem 1.25rem}
-  #contact{padding:2.2rem 1.4rem}
-  .contact-grid{flex-direction:column;align-items:flex-start}
-  .footer-top{flex-direction:column;align-items:flex-start}
-}
-
-@media(max-width:480px){
-  .topbar{padding:0.75rem 1rem}
-  .topbar-inner{padding:0.4rem 0.6rem 0.4rem 0.9rem}
-  .hero-title{font-size:clamp(1.75rem, 8.5vw, 2.4rem)}
-  .hero-stats{grid-template-columns:1fr}
-  .hero-actions{flex-direction:column;width:100%}
-  .btn-primary, .btn-accent{width:100%;justify-content:center}
-  .contact-actions{flex-direction:column;width:100%}
-  .contact-pill{width:100%;justify-content:center}
+  .nav-links,.phone-link{display:none}
+  .mobile-btn{display:flex}
+  .timeline-row{grid-template-columns:1fr;gap:0.4rem}
+  .tl-left{text-align:left}
+  .tl-mid{display:none}
+  .help-stats{gap:2.5rem}
+  .container{padding:0 1.25rem}
 }
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar">
-  <div class="topbar-inner">
-    <a href="#hero" class="tb-mark">
-      <span class="dot"></span>
-      <span>M. Rizwan</span>
-    </a>
-    <div style="display:flex;align-items:center;gap:0.4rem">
-      <div class="tb-links">
-        <a href="#services" class="tb-link">Services</a>
-        <a href="#projects" class="tb-link">Projects</a>
-        <a href="#skills" class="tb-link">Stack</a>
-        <a href="#experience" class="tb-link">Experience</a>
-        <a href="contact.html" class="tb-btn-contact">Contact <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.7rem"></i></a>
-      </div>
-      <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
-        <i class="fa-solid fa-moon"></i>
-        <i class="fa-solid fa-sun"></i>
-      </button>
-      <button class="tb-hamburger" type="button" aria-label="Open menu" onclick="toggleMobileMenu()">
+<!-- SITE HEADER -->
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a href="#hero" class="logo-script">Rizwan</a>
+    <nav class="nav-links">
+      <a href="#services" class="nav-item pill">Services</a>
+      <a href="#works" class="nav-item">Works</a>
+      <a href="#experience" class="nav-item">Experience</a>
+      <a href="contact.html" class="nav-item">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <a href="tel:+923237004270" class="phone-link">+92 (323) 700 4270</a>
+      <a href="tel:+923237004270" class="phone-circle" aria-label="Call Now">
+        <i class="fa-solid fa-phone"></i>
+      </a>
+      <button class="mobile-btn" onclick="toggleMenu()" aria-label="Open menu">
         <i class="fa-solid fa-bars"></i>
       </button>
     </div>
   </div>
-</div>
+</header>
 
-<!-- MOBILE DROPDOWN -->
-<div class="mobile-nav-menu" id="mobileMenu">
-  <a href="#services" onclick="toggleMobileMenu()">Services</a>
-  <a href="#projects" onclick="toggleMobileMenu()">Projects</a>
-  <a href="#skills" onclick="toggleMobileMenu()">Tech Stack</a>
-  <a href="#experience" onclick="toggleMobileMenu()">Experience</a>
-  <a href="contact.html" class="mob-cta" onclick="toggleMobileMenu()">Open Contact Page &rarr;</a>
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobMenu">
+  <a href="#services" onclick="toggleMenu()">Services</a>
+  <a href="#works" onclick="toggleMenu()">Works</a>
+  <a href="#experience" onclick="toggleMenu()">Experience</a>
+  <a href="contact.html" onclick="toggleMenu()">Contact Me &rarr;</a>
 </div>
 
 <!-- HERO SECTION -->
-<div class="hero" id="hero">
-  <div class="eyebrow">Certified Oracle APEX Developer · Since 2022</div>
-  
-  <h1 class="hero-title">
-    Oracle APEX<br>
-    <em>Developer.</em>
-  </h1>
-  
-  <p class="hero-lede">
-    Building high-performance <strong>ERP platforms</strong>, automated <strong>multi-level workflows</strong>, and bulk <strong>PDF reporting engines</strong> engineered to run real business operations.
-  </p>
-
-  <div class="typewriter-badge">
-    <span style="color:var(--accent)">●</span>
-    <span>Specializing in:&nbsp;</span>
-    <span id="tw"></span>
-    <span class="cursor"></span>
-  </div>
-
-  <div class="hero-actions">
-    <a href="#projects" class="btn-primary">
-      <span>View Live Projects</span>
-      <i class="fa-solid fa-arrow-down" style="font-size:0.75rem"></i>
-    </a>
-    <a href="contact.html" class="btn-accent">
-      <span>Get In Touch</span>
-      <i class="fa-solid fa-arrow-right" style="font-size:0.75rem"></i>
-    </a>
-    <div class="social-pills">
-      <a href="https://linkedin.com/in/rizwan0626" target="_blank" class="social-pill" title="LinkedIn" aria-label="LinkedIn">
-        <i class="fa-brands fa-linkedin-in"></i>
-      </a>
-      <a href="https://wa.me/923237004270" target="_blank" class="social-pill" title="WhatsApp" aria-label="WhatsApp">
-        <i class="fa-brands fa-whatsapp"></i>
-      </a>
-      <a href="mailto:rimalik162534@gmail.com" class="social-pill" title="Email" aria-label="Email">
-        <i class="fa-solid fa-envelope"></i>
-      </a>
-    </div>
-  </div>
-
-  <!-- STATS -->
-  <div class="hero-stats">
-    <div class="stat-box">
-      <div class="stat-num">3<span>+</span></div>
-      <div class="stat-label">Years APEX</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num">5</div>
-      <div class="stat-label">Live Systems</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num">1K<span>+</span></div>
-      <div class="stat-label">PDF Invoices / Batch</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-num">10<span>+</span></div>
-      <div class="stat-label">ERP Modules</div>
-    </div>
-  </div>
-</div>
-
-<!-- SERVICES (CLEAN 4-GRID) -->
-<section id="services">
-  <div class="section-inner">
-    <div class="section-head">
-      <div class="section-label">Core Capabilities</div>
-      <h2 class="section-title">What I Build &amp; Deliver</h2>
-      <p class="section-sub">Production-tested enterprise solutions engineered for data integrity, performance, and daily operational ease.</p>
-    </div>
-
-    <div class="services-grid">
-      <div class="service-card">
-        <div>
-          <div class="service-top">
-            <span class="service-num">01 / ARCHITECTURE</span>
-            <div class="service-icon"><i class="fa-solid fa-database"></i></div>
-          </div>
-          <h3 class="service-title">ERP &amp; Business Systems</h3>
-          <p class="service-desc">Full-cycle ERP platforms covering Purchase, Sales, Production, Inventory Control, and Order Fulfillment — built completely in Oracle APEX with normalized database schemas.</p>
-        </div>
-        <div class="service-pills">
-          <span class="service-pill">Oracle APEX</span>
-          <span class="service-pill">PL/SQL Packages</span>
-          <span class="service-pill">Real-Time Stock</span>
+<section class="hero-section" id="hero">
+  <div class="container hero-grid">
+    <!-- LEFT -->
+    <div class="hero-left">
+      <h1 class="hero-headline">
+        Hey There,<br>
+        I’m Rizwan
+      </h1>
+      <a href="mailto:rimalik162534@gmail.com" class="hero-email">rimalik162534@gmail.com</a>
+      <div class="hero-exp-block">
+        <div class="exp-large-num">3+</div>
+        <div class="exp-labels">
+          Years<br>
+          Experience
         </div>
       </div>
+    </div>
 
-      <div class="service-card">
-        <div>
-          <div class="service-top">
-            <span class="service-num">02 / AUTOMATION</span>
-            <div class="service-icon"><i class="fa-solid fa-diagram-project"></i></div>
-          </div>
-          <h3 class="service-title">Multi-Level Approval Workflows</h3>
-          <p class="service-desc">End-to-end approval routing (Employee &rarr; HOD &rarr; CEO) equipped with granular Role-Based Access Control (RBAC), isolated session scopes, and automatic status alerts.</p>
-        </div>
-        <div class="service-pills">
-          <span class="service-pill">RBAC Control</span>
-          <span class="service-pill">HOD/CEO Routing</span>
-          <span class="service-pill">Audit Trail</span>
-        </div>
+    <!-- CENTER AVATAR WITH TEAL SPLASH -->
+    <div class="hero-center">
+      <!-- ARTISTIC TEAL BRUSH SPLASH (SVG) -->
+      <svg class="hero-splash-bg" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M120 180 C80 140, 60 220, 90 280 C120 340, 160 380, 240 410 C320 440, 420 400, 440 310 C460 220, 390 140, 340 100 C290 60, 240 70, 190 110 Z" fill="#2B696D" opacity="0.95"/>
+        <path d="M170 80 C260 50, 350 70, 390 130 C430 190, 450 290, 410 360 C370 430, 280 440, 200 420 C120 400, 80 320, 100 240 C120 160, 140 90, 170 80 Z" fill="#235E63"/>
+        <path d="M280 40 C340 50, 420 100, 440 180 C460 260, 400 350, 320 410 C240 470, 160 440, 110 380 C60 320, 80 230, 120 160 C160 90, 220 30, 280 40 Z" fill="#1F5458" opacity="0.85"/>
+      </svg>
+      
+      <!-- AVATAR HOLDER -->
+      <div class="hero-avatar-wrap">
+        <!-- SVG Professional Developer Illustration -->
+        <svg viewBox="0 0 300 360" fill="none" xmlns="http://www.w3.org/2000/svg" class="hero-avatar-img">
+          <!-- Background glow -->
+          <circle cx="150" cy="150" r="140" fill="#F5B738"/>
+          <!-- Shoulders / Yellow Sweater -->
+          <path d="M40 360 C40 260, 100 230, 150 230 C200 230, 260 260, 260 360 Z" fill="#E5A425"/>
+          <path d="M70 360 C70 275, 110 245, 150 245 C190 245, 230 275, 230 360 Z" fill="#F5B738"/>
+          <!-- Neck -->
+          <rect x="125" y="180" width="50" height="60" rx="10" fill="#E8B088"/>
+          <!-- Head -->
+          <ellipse cx="150" cy="140" rx="55" ry="65" fill="#F3C3A0"/>
+          <!-- Hair & Beard -->
+          <path d="M95 130 C95 85, 120 60, 150 60 C180 60, 205 85, 205 130 C205 140, 200 150, 195 150 C190 110, 180 80, 150 80 C120 80, 110 110, 105 150 C100 150, 95 140, 95 130 Z" fill="#422918"/>
+          <path d="M102 145 C100 185, 120 220, 150 220 C180 220, 200 185, 198 145 C190 180, 175 205, 150 205 C125 205, 110 180, 102 145 Z" fill="#422918"/>
+          <!-- Beanie Cap (Burgundy / Red from design) -->
+          <path d="M90 120 C90 70, 120 40, 150 40 C180 40, 210 70, 210 120 C205 125, 95 125, 90 120 Z" fill="#B32B2B"/>
+          <rect x="86" y="115" width="128" height="15" rx="6" fill="#911F1F"/>
+          <!-- Eyes & Glasses -->
+          <circle cx="130" cy="130" r="14" stroke="#182230" stroke-width="3" fill="none"/>
+          <circle cx="170" cy="130" r="14" stroke="#182230" stroke-width="3" fill="none"/>
+          <line x1="144" y1="130" x2="156" y2="130" stroke="#182230" stroke-width="3"/>
+          <circle cx="130" cy="130" r="4" fill="#182230"/>
+          <circle cx="170" cy="130" r="4" fill="#182230"/>
+          <!-- Smile -->
+          <path d="M135 170 Q150 182 165 170" stroke="#182230" stroke-width="3" stroke-linecap="round" fill="none"/>
+        </svg>
       </div>
+    </div>
 
-      <div class="service-card">
-        <div>
-          <div class="service-top">
-            <span class="service-num">03 / REPORTING</span>
-            <div class="service-icon"><i class="fa-solid fa-file-invoice"></i></div>
-          </div>
-          <h3 class="service-title">High-Volume Batch PDF Engines</h3>
-          <p class="service-desc">High-throughput reporting engines capable of generating 1,000+ high-resolution, print-ready PDF invoices and reports in a single operation without timeouts.</p>
-        </div>
-        <div class="service-pills">
-          <span class="service-pill">Batch PDF</span>
-          <span class="service-pill">Thermal / Invoices</span>
-          <span class="service-pill">Zero Timeouts</span>
-        </div>
+    <!-- RIGHT -->
+    <div class="hero-right">
+      <div class="hero-quote">
+        I design beautifully reliable enterprise systems, And I love what I do.
       </div>
-
-      <div class="service-card">
-        <div>
-          <div class="service-top">
-            <span class="service-num">04 / INTEGRATION</span>
-            <div class="service-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
-          </div>
-          <h3 class="service-title">REST APIs &amp; Cloud Storage</h3>
-          <p class="service-desc">Connecting Oracle APEX with third-party webhooks, OCI Object Storage, Google Drive APIs, and local printer bridges (Node.js) for automated document archival.</p>
+      <div class="hero-cert-badge">
+        <div class="cert-seal">
+          <i class="fa-solid fa-certificate"></i>
         </div>
-        <div class="service-pills">
-          <span class="service-pill">ORDS REST</span>
-          <span class="service-pill">OCI Storage</span>
-          <span class="service-pill">Google Drive API</span>
+        <div class="cert-text">
+          CERTIFIED ORACLE<br>
+          APEX DEVELOPER
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- PROJECTS (5 LIVE PRODUCTION SYSTEMS) -->
-<section id="projects">
-  <div class="section-inner">
-    <div class="section-head">
-      <div class="section-label">Live Deployments</div>
-      <h2 class="section-title">Production Systems Built</h2>
-      <p class="section-sub">Real systems running live operations with real business users.</p>
+<!-- "WHAT DO I HELP?" SECTION -->
+<section class="help-section" id="services">
+  <div class="container help-grid">
+    <!-- 3 CARDS ON LEFT -->
+    <div class="help-cards">
+      <div class="help-card">
+        <div class="help-icon-circle teal">
+          <i class="fa-solid fa-database"></i>
+        </div>
+        <div class="help-card-info">
+          <h4>Enterprise ERP Systems</h4>
+          <p>5 Live Systems</p>
+        </div>
+      </div>
+
+      <div class="help-card">
+        <div class="help-icon-circle yellow">
+          <i class="fa-solid fa-diagram-project"></i>
+        </div>
+        <div class="help-card-info">
+          <h4>Workflow Automation</h4>
+          <p>Multi-Level RBAC</p>
+        </div>
+      </div>
+
+      <div class="help-card">
+        <div class="help-icon-circle coral">
+          <i class="fa-solid fa-file-invoice"></i>
+        </div>
+        <div class="help-card-info">
+          <h4>Batch PDF Engines</h4>
+          <p>1,000+ Invoices / Batch</p>
+        </div>
+      </div>
     </div>
 
-    <div class="projects-grid">
-
-      <!-- PROJECT 1: AG TRADERS ERP -->
-      <div class="project-card featured">
-        <div class="project-media-wrap">
-          <img src="images/erp/Oracle APEX Projects Images.png" alt="AG Traders ERP Screenshot" onerror="this.src='https://placehold.co/800x500/121212/1DBF73?text=AG+Traders+ERP';">
+    <!-- CONTENT ON RIGHT -->
+    <div class="help-content">
+      <h2>What do I help?</h2>
+      <p class="help-p">
+        I will help you find solutions and solve your business operational problems. We use structured database architecture and Oracle APEX to create scalable digital systems. Besides that, also help your business scale.
+      </p>
+      <p class="help-p">
+        We use process design to create enterprise products that eliminate manual bottlenecks and give complete visibility over business workflows.
+      </p>
+      <div class="help-stats">
+        <div>
+          <div class="h-stat-num">1,000+</div>
+          <div class="h-stat-label">PDFs / Single Batch</div>
         </div>
-        <div class="project-body">
-          <div>
-            <div class="project-eyebrow"><i class="fa-solid fa-tag"></i> Flagship ERP · Oracle APEX</div>
-            <h3 class="project-name">AG Traders ERP</h3>
-            <p class="project-desc">
-              Comprehensive enterprise ERP managing the entire operational lifecycle: Purchase, Sales, Production, Order Fulfillment, and Job Work. Features custom invoicing, real-time stock ledger, and dynamic reporting.
-            </p>
-          </div>
-          <a href="https://oracleapex.com/ords/r/yarn_oracle/ag-traders/login" target="_blank" class="project-btn">
-            <span>View Live System</span>
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- PROJECT 2: ESS WORKFLOW -->
-      <div class="project-card">
-        <div class="project-mockup">
-          <i class="fa-solid fa-users-gear"></i>
-          <div style="font-family:var(--display);font-weight:700;font-size:1.15rem">Employee Self-Service</div>
-          <div style="font-family:var(--mono);font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:0.25rem">Approval Workflow Engine</div>
-        </div>
-        <div class="project-body">
-          <div>
-            <div class="project-eyebrow"><i class="fa-solid fa-tag"></i> Workflow RBAC · JK Group</div>
-            <h3 class="project-name">Employee Self-Service</h3>
-            <p class="project-desc">
-              Multi-tier approval routing with strict Role-Based Access Control. Each user operates strictly in their scoped environment post-login with HOD &rarr; CEO approval chains.
-            </p>
-          </div>
-          <a href="https://ess.oracleapex.me" target="_blank" class="project-btn">
-            <span>View Live System</span>
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- PROJECT 3: GYM MANAGEMENT -->
-      <div class="project-card">
-        <div class="project-mockup">
-          <i class="fa-solid fa-dumbbell"></i>
-          <div style="font-family:var(--display);font-weight:700;font-size:1.15rem">Gym Management Platform</div>
-          <div style="font-family:var(--mono);font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:0.25rem">Billing &amp; Member Portal</div>
-        </div>
-        <div class="project-body">
-          <div>
-            <div class="project-eyebrow"><i class="fa-solid fa-tag"></i> Membership Platform</div>
-            <h3 class="project-name">Gym Management</h3>
-            <p class="project-desc">
-              Member onboarding, automated fee collection schedules, attendance tracking, and owner dashboard with real-time recurring revenue analytics.
-            </p>
-          </div>
-          <a href="https://gym.oracleapex.me" target="_blank" class="project-btn">
-            <span>View Live System</span>
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- PROJECT 4: HOSPITAL MANAGEMENT -->
-      <div class="project-card">
-        <div class="project-mockup">
-          <i class="fa-solid fa-hospital-user"></i>
-          <div style="font-family:var(--display);font-weight:700;font-size:1.15rem">Hospital Management</div>
-          <div style="font-family:var(--mono);font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:0.25rem">Clinical Records &amp; Schedules</div>
-        </div>
-        <div class="project-body">
-          <div>
-            <div class="project-eyebrow"><i class="fa-solid fa-tag"></i> Healthcare Suite</div>
-            <h3 class="project-name">Hospital Management</h3>
-            <p class="project-desc">
-              Patient registration, doctor and nurse shift rostering, medical billing, staff payroll, and compliance audit trail maintaining data security.
-            </p>
-          </div>
-          <a href="https://hms.oracleapex.me" target="_blank" class="project-btn">
-            <span>View Live System</span>
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-        </div>
-      </div>
-
-      <!-- PROJECT 5: POINT OF SALE (POS) -->
-      <div class="project-card">
-        <div class="project-mockup">
-          <i class="fa-solid fa-cash-register"></i>
-          <div style="font-family:var(--display);font-weight:700;font-size:1.15rem">Point of Sale (POS)</div>
-          <div style="font-family:var(--mono);font-size:0.75rem;color:rgba(255,255,255,0.6);margin-top:0.25rem">Retail Billing &amp; Stock</div>
-        </div>
-        <div class="project-body">
-          <div>
-            <div class="project-eyebrow"><i class="fa-solid fa-tag"></i> Retail POS</div>
-            <h3 class="project-name">Point of Sale (POS)</h3>
-            <p class="project-desc">
-              High-speed item lookup, instant barcode-speed transaction processing, receipt generation, and real-time inventory adjustments built for active retail outlets.
-            </p>
-          </div>
-          <a href="https://pos.oracleapex.me" target="_blank" class="project-btn">
-            <span>View Live System</span>
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS / TECH STACK -->
-<section id="skills">
-  <div class="section-inner">
-    <div class="section-head" style="text-align:center">
-      <div class="section-label" style="justify-content:center">Technical Stack</div>
-      <h2 class="section-title">Tools &amp; Technologies</h2>
-      <p class="section-sub" style="margin:0.5rem auto 0">Production-tested tools shipping daily in live enterprise applications.</p>
-    </div>
-
-    <div class="stack-grid">
-      <div class="stack-card">
-        <h3 class="stack-title"><i class="fa-solid fa-database"></i> Database &amp; PL/SQL</h3>
-        <div class="stack-tags">
-          <span class="stack-tag"><i class="fa-solid fa-server"></i>Oracle DB 19c &rarr; 23ai</span>
-          <span class="stack-tag"><i class="fa-solid fa-code"></i>PL/SQL Packages</span>
-          <span class="stack-tag"><i class="fa-solid fa-bolt"></i>SQL Tuning</span>
-          <span class="stack-tag"><i class="fa-solid fa-table"></i>Data Modeling</span>
-          <span class="stack-tag"><i class="fa-solid fa-key"></i>Triggers &amp; Procedures</span>
-        </div>
-      </div>
-
-      <div class="stack-card">
-        <h3 class="stack-title"><i class="fa-solid fa-layer-group"></i> Oracle APEX &amp; Frontend</h3>
-        <div class="stack-tags">
-          <span class="stack-tag"><i class="fa-solid fa-cubes"></i>APEX 19.1 &rarr; 24.2</span>
-          <span class="stack-tag"><i class="fa-brands fa-js"></i>JavaScript &amp; jQuery</span>
-          <span class="stack-tag"><i class="fa-solid fa-table-cells"></i>Interactive Grids</span>
-          <span class="stack-tag"><i class="fa-solid fa-chart-pie"></i>Apache ECharts</span>
-          <span class="stack-tag"><i class="fa-brands fa-html5"></i>HTML5 &amp; CSS3</span>
-        </div>
-      </div>
-
-      <div class="stack-card">
-        <h3 class="stack-title"><i class="fa-solid fa-cloud"></i> Cloud &amp; APIs</h3>
-        <div class="stack-tags">
-          <span class="stack-tag"><i class="fa-solid fa-plug"></i>ORDS REST Services</span>
-          <span class="stack-tag"><i class="fa-solid fa-cloud-arrow-up"></i>OCI Object Storage</span>
-          <span class="stack-tag"><i class="fa-brands fa-google-drive"></i>Google Drive API</span>
-          <span class="stack-tag"><i class="fa-brands fa-node-js"></i>Node.js Printer Bridge</span>
-          <span class="stack-tag"><i class="fa-solid fa-shield-halved"></i>RBAC &amp; OAuth</span>
-        </div>
-      </div>
-
-      <div class="stack-card">
-        <h3 class="stack-title"><i class="fa-solid fa-screwdriver-wrench"></i> Tooling &amp; Servers</h3>
-        <div class="stack-tags">
-          <span class="stack-tag"><i class="fa-brands fa-git-alt"></i>Git &amp; GitHub</span>
-          <span class="stack-tag"><i class="fa-solid fa-terminal"></i>TOAD for Oracle</span>
-          <span class="stack-tag"><i class="fa-solid fa-code"></i>SQL Developer</span>
-          <span class="stack-tag"><i class="fa-solid fa-server"></i>Nginx &amp; Tomcat</span>
-          <span class="stack-tag"><i class="fa-brands fa-linux"></i>Linux</span>
+        <div>
+          <div class="h-stat-num">10+</div>
+          <div class="h-stat-label">Core ERP Modules</div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- EXPERIENCE TIMELINE -->
-<section id="experience">
-  <div class="section-inner">
-    <div class="section-head" style="text-align:center">
-      <div class="section-label" style="justify-content:center">Track Record</div>
-      <h2 class="section-title">Work Experience</h2>
-      <p class="section-sub" style="margin:0.5rem auto 0">Building software that companies rely on every day.</p>
+<!-- "MY WORK EXPERIENCE" SECTION -->
+<section class="exp-section" id="experience">
+  <div class="container">
+    <div class="section-center-head">
+      <h2>My Work Experience</h2>
     </div>
 
-    <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-date">2024 — Present</div>
-          <div class="timeline-role">Oracle APEX Developer</div>
-          <div class="timeline-company">JK Group of Companies · Faisalabad, Pakistan</div>
-          <ul class="timeline-list">
-            <li>Engineered Employee Self-Service (ESS) featuring multi-level HOD and CEO approval chains.</li>
-            <li>Built high-performance batch PDF engine producing 1,000+ customer invoices per batch operation.</li>
-            <li>Integrated OCI Object Storage and Google Drive APIs for automated digital document archiving.</li>
-          </ul>
+    <div class="timeline-wrap">
+      <!-- ROW 1 -->
+      <div class="timeline-row">
+        <div class="tl-left">
+          <div class="tl-company">JK Group of Companies</div>
+          <div class="tl-date">2024 — Present</div>
+        </div>
+        <div class="tl-mid">
+          <div class="tl-dot"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right">
+          <h3 class="tl-role">Oracle APEX Developer</h3>
+          <p class="tl-desc">
+            Engineered Employee Self-Service with multi-level HOD and CEO approval routing. Built high-volume batch PDF engine generating 1,000+ customer invoices per batch. Integrated OCI Object Storage and Google Drive API for automated digital document archiving.
+          </p>
         </div>
       </div>
 
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-date">2022 — 2024</div>
-          <div class="timeline-role">APEX Developer</div>
-          <div class="timeline-company">Saylani Welfare International Trust</div>
-          <ul class="timeline-list">
-            <li>Developed, deployed, and supported enterprise Oracle APEX applications for 1.5+ years.</li>
-            <li>Migrated legacy Oracle Forms 6i modules to modern, responsive Oracle APEX interfaces.</li>
-            <li>Authored custom PL/SQL packages, scheduled jobs, and complex analytical reports.</li>
-          </ul>
+      <!-- ROW 2 -->
+      <div class="timeline-row">
+        <div class="tl-left">
+          <div class="tl-company">Saylani Welfare Trust</div>
+          <div class="tl-date">2022 — 2024</div>
+        </div>
+        <div class="tl-mid">
+          <div class="tl-dot coral"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right">
+          <h3 class="tl-role">APEX Developer</h3>
+          <p class="tl-desc">
+            Developed and supported enterprise Oracle APEX applications for 1.5+ years. Migrated legacy Oracle Forms 6i modules to modern responsive APEX interfaces. Built audit workflows, scheduled batch jobs, and complex analytical financial reports.
+          </p>
         </div>
       </div>
 
-      <div class="timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="timeline-card">
-          <div class="timeline-date">2018 — 2022</div>
-          <div class="timeline-role">BS Computer Science</div>
-          <div class="timeline-company">GC University Faisalabad · Certified Oracle APEX Developer</div>
-          <ul class="timeline-list">
-            <li>Specialized in Relational Database Management, Software Engineering, and Enterprise Systems.</li>
-            <li>Awarded Oracle APEX Certification with distinction in PL/SQL query optimization.</li>
-          </ul>
+      <!-- ROW 3 -->
+      <div class="timeline-row">
+        <div class="tl-left">
+          <div class="tl-company">GC University Faisalabad</div>
+          <div class="tl-date">2018 — 2022</div>
+        </div>
+        <div class="tl-mid">
+          <div class="tl-dot yellow"></div>
+          <div class="tl-line"></div>
+        </div>
+        <div class="tl-right">
+          <h3 class="tl-role">BS Computer Science</h3>
+          <p class="tl-desc">
+            Specialized in Relational Database Management Systems, Software Engineering, and Enterprise Software Architecture. Awarded Oracle APEX Certification with distinction.
+          </p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CALL TO ACTION SECTION (MATCHING DIGITALCREATOR STYLE) -->
-<section style="padding-top:1rem">
-  <div id="contact">
-    <div class="contact-grid">
+<!-- "MY LATEST WORKS" SECTION -->
+<section class="works-section" id="works">
+  <div class="container">
+    <div class="works-head">
       <div>
-        <div class="contact-title">Questions? Let's talk <em>APEX.</em></div>
-        <div class="contact-sub">Have an Oracle APEX project, need enterprise ERP architecture, or custom workflow automation? Let's discuss your requirements.</div>
+        <h2>My Latest Works</h2>
+        <p>Perfect solution for enterprise business operations</p>
       </div>
-      <div class="contact-actions">
-        <a href="contact.html" class="contact-pill green"><i class="fa-solid fa-arrow-right"></i> Open Contact Page</a>
-        <a href="mailto:rimalik162534@gmail.com" class="contact-pill"><i class="fa-solid fa-envelope"></i> rimalik162534@gmail.com</a>
-        <a href="https://wa.me/923237004270" target="_blank" class="contact-pill"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      <a href="https://oracleapex.com/ords/r/yarn_oracle/ag-traders/login" target="_blank" class="works-explore-link">
+        <span>Explore More Works</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="works-cards-row">
+      <!-- CARD 1: MUSTARD YELLOW -->
+      <div class="work-card card-yellow">
+        <div class="work-card-top">
+          <div class="work-card-title">AG Traders ERP</div>
+          <div class="work-card-sub">Enterprise ERP Platform</div>
+        </div>
+        <div class="work-card-preview">
+          <img src="images/erp/Oracle APEX Projects Images.png" alt="AG Traders ERP System Screenshot" onerror="this.src='https://placehold.co/600x400/E5A425/FFFFFF?text=AG+Traders+ERP';">
+        </div>
+        <a href="https://oracleapex.com/ords/r/yarn_oracle/ag-traders/login" target="_blank" class="work-card-btn">
+          <span>View Live System</span>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+
+      <!-- CARD 2: TEAL -->
+      <div class="work-card card-teal">
+        <div class="work-card-top">
+          <div class="work-card-title">Employee Self-Service</div>
+          <div class="work-card-sub">Workflow &amp; RBAC System</div>
+        </div>
+        <div class="work-card-preview" style="display:flex;flex-direction:column;gap:0.5rem;text-align:center;padding:1.5rem">
+          <i class="fa-solid fa-users-gear" style="font-size:3rem;color:#fff"></i>
+          <span style="font-family:var(--font-heading);font-weight:700;font-size:1.1rem">ESS Workflow Engine</span>
+          <span style="font-size:0.75rem;opacity:0.85">HOD &rarr; CEO Multi-Tier Approvals</span>
+        </div>
+        <a href="https://ess.oracleapex.me" target="_blank" class="work-card-btn">
+          <span>View Live System</span>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
+      </div>
+
+      <!-- CARD 3: CORAL -->
+      <div class="work-card card-coral">
+        <div class="work-card-top">
+          <div class="work-card-title">Point of Sale &amp; Gym</div>
+          <div class="work-card-sub">Retail &amp; Member Systems</div>
+        </div>
+        <div class="work-card-preview" style="display:flex;flex-direction:column;gap:0.5rem;text-align:center;padding:1.5rem">
+          <i class="fa-solid fa-cash-register" style="font-size:3rem;color:#fff"></i>
+          <span style="font-family:var(--font-heading);font-weight:700;font-size:1.1rem">Retail Billing &amp; Inventory</span>
+          <span style="font-size:0.75rem;opacity:0.85">Direct Thermal Printing &amp; Ledgers</span>
+        </div>
+        <a href="https://pos.oracleapex.me" target="_blank" class="work-card-btn">
+          <span>View Live System</span>
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        </a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-      <div>
-        <div class="footer-name">Muhammad Rizwan<span>.</span></div>
-        <div class="footer-tag">Oracle APEX developer building reliable, high-performance ERP systems and automated business software.</div>
+<!-- "PEOPLE TALK ABOUT US" SECTION -->
+<section class="testimonials-section">
+  <div class="container">
+    <h2>People talk about us</h2>
+    <p class="test-sub">I got a job that was in accordance with the field of work. The process of building our enterprise application was seamless.</p>
+
+    <div class="test-cards-row">
+      <div class="test-card">
+        <div class="test-avatar">JK</div>
+        <p class="test-quote">
+          "Working with Rizwan was seamless from start to finish. He understood our enterprise requirements quickly, solved our batch invoice bottleneck, and built a PDF engine that generates 1000+ files per batch flawlessly."
+        </p>
+        <div>
+          <div class="test-author">Operations Director</div>
+          <div class="test-role">JK Group of Companies</div>
+        </div>
       </div>
-      <div class="footer-actions">
-        <a href="https://linkedin.com/in/rizwan0626" target="_blank" class="footer-pill"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
-        <a href="https://wa.me/923237004270" target="_blank" class="footer-pill"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-        <a href="contact.html" class="footer-pill"><i class="fa-solid fa-envelope"></i> Contact Page</a>
+
+      <div class="test-card">
+        <div class="test-avatar y">SW</div>
+        <p class="test-quote">
+          "Rizwan brought our legacy Forms 6i systems into modern Oracle APEX with remarkable speed and precision. Every department now operates on clean, fast, and automated approval workflows."
+        </p>
+        <div>
+          <div class="test-author">IT Lead</div>
+          <div class="test-role">Saylani Welfare Trust</div>
+        </div>
+      </div>
+
+      <div class="test-card">
+        <div class="test-avatar c">AG</div>
+        <p class="test-quote">
+          "The complete AG Traders ERP platform handled our purchase, production, and real-time inventory tracking effortlessly. Highly recommended for full-cycle Oracle APEX development."
+        </p>
+        <div>
+          <div class="test-author">General Manager</div>
+          <div class="test-role">AG Traders ERP</div>
+        </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <span>&copy; <span id="yr"></span> Muhammad Rizwan — Oracle APEX Development</span>
-      <span>Faisalabad, Pakistan · Worldwide Remote</span>
+  </div>
+</section>
+
+<!-- CALL TO ACTION & FOOTER -->
+<footer class="cta-footer-section" id="contact">
+  <div class="container">
+    <div class="cta-footer-top">
+      <div class="cta-big-text">
+        <h2>
+          Let’s make something<br>
+          amazing together.
+        </h2>
+        <div class="cta-say-hi">
+          Start by <a href="contact.html">saying hi</a>
+        </div>
+      </div>
+
+      <div class="footer-info">
+        <h4>Information</h4>
+        <p>
+          Faisalabad, Pakistan · Worldwide Remote<br>
+          rimalik162534@gmail.com<br>
+          +92 (323) 700 4270
+        </p>
+        <div class="footer-nav-pills">
+          <a href="#services" class="f-pill boxed">Services</a>
+          <a href="#works" class="f-pill">Works</a>
+          <a href="#experience" class="f-pill">Experience</a>
+          <a href="contact.html" class="f-pill">Contact</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom-bar">
+      <div class="fb-left">
+        <span class="logo-script">Rizwan</span>
+        <span>|</span>
+        <span>&copy; 2026. All Rights Reserved</span>
+      </div>
+      <div class="fb-right">
+        Certified Oracle APEX Developer
+      </div>
     </div>
   </div>
 </footer>
 
 <script>
-document.getElementById('yr').textContent = new Date().getFullYear();
-
-// THEME TOGGLE
-const themeToggleBtn = document.querySelector('.theme-toggle');
-if(themeToggleBtn){
-  themeToggleBtn.addEventListener('click', () => {
-    const cur = document.documentElement.getAttribute('data-theme') || 'light';
-    const next = cur === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-  });
-}
-
-// MOBILE MENU
-function toggleMobileMenu(){
-  const m = document.getElementById('mobileMenu');
+function toggleMenu(){
+  const m = document.getElementById('mobMenu');
   if(m) m.classList.toggle('open');
 }
-
-// TYPEWRITER
-const phrases = [
-  'ERP Systems Developer',
-  'Workflow Automation Engineer',
-  'REST API Integration Specialist',
-  '1,000+ Batch PDF Engine Builder',
-  'Available for Remote Contract'
-];
-let pi = 0, ci = 0, del = false;
-const twEl = document.getElementById('tw');
-function type(){
-  const cur = phrases[pi];
-  if(!del){
-    ci++;
-    twEl.textContent = cur.slice(0, ci);
-    if(ci === cur.length){
-      del = true;
-      setTimeout(type, 2200);
-      return;
-    }
-    setTimeout(type, 50);
-  } else {
-    if(ci > 0){
-      ci--;
-      twEl.textContent = cur.slice(0, ci) || '\u200B';
-    }
-    if(ci === 0){
-      del = false;
-      pi = (pi + 1) % phrases.length;
-      twEl.textContent = '\u200B';
-      setTimeout(type, 180);
-      return;
-    }
-    setTimeout(type, 28);
-  }
-}
-type();
 </script>
 
 </body>

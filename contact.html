@@ -1,645 +1,422 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script>
-(function(){
-  var t = localStorage.getItem('theme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
-  document.documentElement.setAttribute('data-theme', t);
-})();
-</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>Contact — Muhammad Rizwan | Oracle APEX Developer</title>
-<meta name="description" content="Get in touch with Muhammad Rizwan for Oracle APEX ERP architecture, workflow automation, and custom high-volume batch reporting.">
+<meta name="description" content="Contact Muhammad Rizwan for enterprise Oracle APEX development, ERP architecture, and workflow automation.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boxing@400&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --cream:#FAFAF8;
-  --cream2:#F1F0EC;
-  --paper:#FFFFFF;
-  --ink:#121212;
-  --ink-soft:#67635A;
-  --ink-faint:#9B9689;
-  --line:rgba(18,18,18,0.12);
-  --line2:rgba(18,18,18,0.07);
-  --green:#1DBF73;
-  --green-deep:#12653F;
-  --green-dim:rgba(29,191,115,0.13);
-  --accent:var(--green);
-  --accent-deep:var(--green-deep);
-  --accent-dim:var(--green-dim);
-  --dark:#121212;
-  --dark2:#1C1C1C;
-  --r-lg:24px;
-  --r-md:16px;
-  --r-sm:10px;
-  --r-pill:999px;
-  --mono:'JetBrains Mono',monospace;
-  --display:'Space Grotesk',sans-serif;
-  --headline:'Boxing','Space Grotesk',Georgia,serif;
-  --body:'Inter',sans-serif;
-  --topbar-bg:rgba(250,250,248,0.88);
-  --card-shadow:0 10px 30px -15px rgba(18,18,18,0.1);
-}
-
-/* ============ DARK MODE ============ */
-html[data-theme="dark"]{
-  --cream:#141414;
-  --cream2:#1E1E1E;
-  --paper:#1A1A1A;
-  --ink:#F2F1EC;
-  --ink-soft:#B8B4A9;
-  --ink-faint:#7A766C;
-  --line:rgba(255,255,255,0.12);
-  --line2:rgba(255,255,255,0.06);
-  --green-deep:#2FE58B;
-  --accent:#2FE58B;
-  --accent-deep:#2FE58B;
-  --accent-dim:rgba(47,229,139,0.15);
-  --dark:#0A0A0A;
-  --dark2:#000000;
-  --topbar-bg:rgba(20,20,20,0.88);
-  --card-shadow:0 14px 34px -18px rgba(0,0,0,0.55);
-  color-scheme: dark;
+  --bg-cream:#FAF6F0;
+  --bg-sand:#F7F2ED;
+  --bg-white:#FFFFFF;
+  --text-dark:#182230;
+  --text-soft:#647082;
+  --text-muted:#94A3B8;
+  --teal:#2B696D;
+  --teal-dark:#1F5458;
+  --teal-light:#EBF3F3;
+  --yellow:#F5B738;
+  --coral:#E85D4E;
+  --coral-dark:#D34636;
+  --coral-light:#FDF0EE;
+  --border:rgba(24,34,48,0.09);
+  --font-logo:'Caveat',cursive;
+  --font-heading:'Outfit',sans-serif;
+  --font-body:'Plus Jakarta Sans',sans-serif;
 }
 
 html{scroll-behavior:smooth}
 body{
-  background:var(--cream);
-  color:var(--ink);
-  font-family:var(--body);
+  background-color:var(--bg-cream);
+  color:var(--text-dark);
+  font-family:var(--font-body);
   font-size:16px;
   line-height:1.6;
   overflow-x:hidden;
   width:100%;
 }
-a{color:inherit}
-::selection{background:var(--green);color:#fff}
+a{color:inherit;text-decoration:none}
 
-body::before{
-  content:'';
-  position:fixed;
-  inset:0;
-  background-image:
-    linear-gradient(rgba(18,18,18,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(18,18,18,0.035) 1px, transparent 1px);
-  background-size:44px 44px;
-  pointer-events:none;
-  z-index:0;
-}
-html[data-theme="dark"] body::before{
-  background-image:
-    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-}
-
-/* ============ TOPBAR ============ */
-.topbar{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:200;
-  display:flex;
-  justify-content:center;
-  padding:1rem 1.25rem;
-  pointer-events:none;
-}
-.topbar-inner{
-  pointer-events:auto;
-  width:100%;
+.container{
   max-width:1180px;
+  margin:0 auto;
+  padding:0 2rem;
+}
+
+/* Header */
+.site-header{
+  padding:2rem 0 1.5rem;
+}
+.nav-wrap{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  background:var(--topbar-bg);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
-  border:1px solid var(--line);
-  border-radius:var(--r-pill);
-  padding:0.45rem 0.6rem 0.45rem 1.2rem;
-  box-shadow:var(--card-shadow);
-  gap:0.75rem;
 }
-.tb-mark{
-  display:flex;
-  align-items:center;
-  gap:0.55rem;
-  font-family:var(--display);
+.logo-script{
+  font-family:var(--font-logo);
+  font-size:2.4rem;
   font-weight:700;
-  font-size:0.92rem;
-  text-decoration:none;
-  color:var(--ink);
-  white-space:nowrap;
+  color:var(--text-dark);
+  line-height:1;
 }
-.tb-mark .dot{
-  width:8px;
-  height:8px;
-  border-radius:50%;
-  background:var(--accent);
-  box-shadow:0 0 8px var(--accent);
-  animation:pulse 2s infinite;
-  flex-shrink:0;
-}
-@keyframes pulse{
-  0%,100%{opacity:1;transform:scale(1)}
-  50%{opacity:0.4;transform:scale(0.8)}
-}
-.tb-back-btn{
-  font-family:var(--display);
+.back-btn{
+  font-family:var(--font-heading);
+  font-size:0.88rem;
   font-weight:700;
-  font-size:0.82rem;
-  color:#fff;
-  background:var(--dark);
-  padding:0.55rem 1.15rem;
-  border-radius:var(--r-pill);
-  text-decoration:none;
+  color:var(--text-dark);
   display:inline-flex;
   align-items:center;
-  gap:0.45rem;
-  white-space:nowrap;
-  transition:background 0.2s, transform 0.15s;
-}
-html[data-theme="dark"] .tb-back-btn{
-  background:var(--green);
-  color:#08150E;
-}
-.tb-back-btn:hover{
-  background:var(--green-deep);
-  color:#fff;
-  transform:translateY(-1px);
-}
-.theme-toggle{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:var(--ink-soft);
-  background:none;
-  border:none;
-  cursor:pointer;
+  gap:0.5rem;
+  padding:0.5rem 1.2rem;
+  border:1.5px solid var(--text-dark);
+  border-radius:999px;
   transition:background 0.2s, color 0.2s;
-  font-size:0.95rem;
-  flex-shrink:0;
 }
-.theme-toggle:hover{
-  background:var(--cream2);
-  color:var(--ink);
+.back-btn:hover{
+  background:var(--text-dark);
+  color:#fff;
 }
-.theme-toggle .fa-sun{display:none}
-html[data-theme="dark"] .theme-toggle .fa-sun{display:inline}
-html[data-theme="dark"] .theme-toggle .fa-moon{display:none}
 
-/* ============ CONTACT HERO ============ */
+/* Hero */
 .contact-hero{
-  padding:7.5rem 1.5rem 2rem;
+  padding:3rem 0 2rem;
   text-align:center;
-  position:relative;
-  z-index:1;
 }
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:0.6rem;
-  font-family:var(--mono);
-  font-size:0.75rem;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:var(--accent-deep);
-  background:var(--accent-dim);
-  padding:0.4rem 1rem;
-  border-radius:var(--r-pill);
-  margin-bottom:1.2rem;
+.contact-hero h1{
+  font-family:var(--font-heading);
+  font-size:clamp(2.4rem, 5vw, 3.8rem);
+  font-weight:800;
+  letter-spacing:-0.025em;
+  line-height:1.1;
+  color:var(--text-dark);
+  margin-bottom:1rem;
 }
-.eyebrow::before{
-  content:'';
-  display:inline-block;
-  width:6px;
-  height:6px;
-  border-radius:50%;
-  background:var(--accent);
+.contact-hero h1 span{
+  color:var(--coral);
 }
-.contact-hero-title{
-  font-family:var(--headline);
-  font-weight:400;
-  font-size:clamp(1.95rem, 5.5vw, 3.8rem);
-  line-height:1.02;
-  letter-spacing:-0.015em;
-  text-transform:uppercase;
-  max-width:800px;
+.contact-hero p{
+  font-size:1.05rem;
+  color:var(--text-soft);
+  max-width:520px;
   margin:0 auto;
-  overflow-wrap:break-word;
-  word-break:normal;
-}
-.contact-hero-title em{
-  font-style:normal;
-  color:var(--accent-deep);
-}
-html[data-theme="dark"] .contact-hero-title em{
-  color:var(--accent, #2FE58B);
-}
-.contact-hero-lede{
-  font-family:var(--body);
-  font-size:1.02rem;
-  color:var(--ink-soft);
-  max-width:50ch;
-  margin:1.2rem auto 0;
-  line-height:1.65;
 }
 
-/* ============ CONTACT SECTION & LAYOUT ============ */
-#contactSection{
-  max-width:1180px;
-  margin:2rem auto 0;
-  padding:0 1.5rem;
-  position:relative;
-  z-index:1;
-}
+/* Layout */
 .contact-layout{
   display:grid;
-  grid-template-columns:1.1fr 0.9fr;
-  gap:2rem;
+  grid-template-columns:1.2fr 1fr;
+  gap:3rem;
+  padding:3rem 0 6rem;
   align-items:start;
 }
 
-/* FORM CARD */
-.contact-form-card{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:var(--r-lg);
-  padding:2.4rem 2.6rem;
-  box-shadow:var(--card-shadow);
-  position:relative;
-  z-index:1;
+/* Form Card */
+.form-card{
+  background:#fff;
+  border-radius:28px;
+  padding:2.5rem 2.8rem;
+  box-shadow:0 18px 45px -15px rgba(24,34,48,0.08);
+  border:1px solid rgba(24,34,48,0.06);
 }
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
+.form-card h3{
+  font-family:var(--font-heading);
+  font-size:1.5rem;
+  font-weight:800;
+  margin-bottom:0.4rem;
+}
+.form-card p{
+  font-size:0.9rem;
+  color:var(--text-soft);
+  margin-bottom:1.8rem;
+}
+
+.contact-form{
+  display:flex;
+  flex-direction:column;
   gap:1.2rem;
 }
 .form-group{
   display:flex;
   flex-direction:column;
-  gap:0.45rem;
-}
-.form-group.full{
-  grid-column:1 / -1;
+  gap:0.4rem;
 }
 .form-group label{
-  font-family:var(--mono);
-  font-size:0.7rem;
-  letter-spacing:0.06em;
+  font-family:var(--font-heading);
+  font-size:0.8rem;
+  font-weight:700;
+  color:var(--text-dark);
   text-transform:uppercase;
-  color:var(--ink-soft);
+  letter-spacing:0.04em;
 }
-.form-group label .required{
-  color:var(--accent-deep);
-}
-.form-group input, .form-group textarea, .form-group select{
+.form-input, .form-textarea{
   width:100%;
-  font-family:var(--body);
-  font-size:0.92rem;
-  color:var(--ink);
-  background:var(--cream2);
-  border:1.5px solid var(--line);
-  border-radius:10px;
-  padding:0.85rem 1rem;
+  font-family:var(--font-body);
+  font-size:0.95rem;
+  color:var(--text-dark);
+  background:var(--bg-cream);
+  border:1.5px solid rgba(24,34,48,0.1);
+  border-radius:14px;
+  padding:0.9rem 1.1rem;
   outline:none;
-  transition:border-color 0.2s, box-shadow 0.2s;
+  transition:border-color 0.2s, background 0.2s;
 }
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus{
-  border-color:var(--accent);
-  box-shadow:0 0 0 3px var(--accent-dim);
+.form-input:focus, .form-textarea:focus{
+  border-color:var(--teal);
+  background:#fff;
 }
-.form-group textarea{
+.form-textarea{
   min-height:140px;
   resize:vertical;
 }
-.form-actions{
-  margin-top:1.5rem;
-  display:flex;
-  align-items:center;
-  gap:1rem;
-  flex-wrap:wrap;
-}
-.form-submit{
-  font-family:var(--display);
+.btn-submit{
+  font-family:var(--font-heading);
+  font-size:0.95rem;
   font-weight:700;
-  font-size:0.88rem;
-  color:#08150E;
-  background:var(--green);
-  border:1px solid var(--green);
-  border-radius:var(--r-pill);
-  padding:0.85rem 1.8rem;
+  color:#fff;
+  background:var(--teal);
+  border:none;
+  border-radius:999px;
+  padding:1rem 2rem;
   cursor:pointer;
-  transition:background 0.2s, transform 0.1s;
   display:inline-flex;
   align-items:center;
-  gap:0.5rem;
+  justify-content:center;
+  gap:0.6rem;
+  transition:background 0.2s, transform 0.15s;
+  margin-top:0.6rem;
 }
-.form-submit:hover{
-  background:#22d17f;
+.btn-submit:hover{
+  background:var(--teal-dark);
   transform:translateY(-1px);
 }
-.form-status{
+.form-success-box{
   display:none;
-  margin-top:1.2rem;
-  padding:0.9rem 1.1rem;
-  border-radius:10px;
-  font-family:var(--body);
-  font-size:0.85rem;
-  line-height:1.5;
-}
-.form-status.success{
-  display:block;
-  background:rgba(29,191,115,0.1);
-  color:var(--green);
-  border:1px solid rgba(29,191,115,0.3);
-}
-.privacy-note{
-  margin-top:1rem;
-  font-family:var(--body);
-  font-size:0.75rem;
-  color:var(--ink-faint);
-  line-height:1.5;
-}
-
-/* SIDE DETAILS */
-.contact-side{
-  display:flex;
-  flex-direction:column;
-  gap:1rem;
-}
-.contact-side-card{
-  background:var(--dark);
-  color:#fff;
-  border-radius:var(--r-lg);
-  padding:2rem 2.2rem;
-  box-shadow:0 18px 45px -18px rgba(0,0,0,0.3);
-  position:relative;
-  z-index:1;
-}
-.contact-side-title{
-  font-family:var(--display);
-  font-weight:700;
-  font-size:1.15rem;
-  margin-bottom:0.4rem;
-}
-.contact-side-sub{
-  font-family:var(--body);
-  font-size:0.86rem;
-  color:rgba(255,255,255,0.6);
-  line-height:1.6;
-  margin-bottom:1.4rem;
-}
-.contact-side-links{
-  display:flex;
-  flex-direction:column;
-  gap:0.6rem;
-}
-.contact-pill{
-  font-family:var(--display);
-  font-size:0.84rem;
+  background:var(--teal-light);
+  border:1px solid var(--teal);
+  color:var(--teal-dark);
+  font-family:var(--font-heading);
   font-weight:600;
-  color:#fff;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.16);
-  padding:0.75rem 1rem;
-  border-radius:var(--r-pill);
-  text-decoration:none;
-  display:inline-flex;
-  align-items:center;
-  gap:0.6rem;
-  transition:background 0.2s;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-.contact-pill:hover{
-  background:rgba(255,255,255,0.16);
-}
-.contact-pill.green{
-  background:var(--green);
-  color:#08150E;
-  border-color:var(--green);
-  font-weight:700;
-}
-.contact-pill.green:hover{
-  background:#22d17f;
-}
-
-.contact-side-note{
-  background:var(--paper);
-  border:1px solid var(--line);
-  border-radius:var(--r-lg);
-  padding:1.6rem 1.8rem;
-  box-shadow:var(--card-shadow);
-  position:relative;
-  z-index:1;
-}
-.contact-side-note .label{
-  font-family:var(--mono);
-  font-size:0.68rem;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  color:var(--accent-deep);
-  margin-bottom:0.4rem;
-  font-weight:600;
-}
-.contact-side-note p{
-  font-family:var(--body);
-  font-size:0.85rem;
-  color:var(--ink-soft);
-  line-height:1.6;
-  margin:0;
-}
-
-/* ============ FOOTER ============ */
-footer{
-  background:var(--dark);
-  color:#fff;
-  padding:2.5rem 1.5rem;
+  font-size:0.92rem;
+  padding:1rem;
+  border-radius:12px;
   text-align:center;
-  font-family:var(--mono);
-  font-size:0.75rem;
-  color:rgba(255,255,255,0.4);
-  margin-top:4rem;
-}
-footer a{
-  color:var(--green);
-  text-decoration:none;
+  margin-top:1rem;
 }
 
-/* ============ STRICT MOBILE RESPONSIVENESS ============ */
-@media(max-width:900px){
-  .contact-layout{grid-template-columns:1fr;gap:1.8rem}
+/* Info Side */
+.info-cards{
+  display:flex;
+  flex-direction:column;
+  gap:1.2rem;
 }
-@media(max-width:640px){
-  .contact-hero{padding:6.2rem 1.25rem 1.5rem}
-  .contact-hero-title{font-size:clamp(1.65rem, 8vw, 2.3rem);line-height:1.05}
-  #contactSection{padding:0 1.25rem}
-  .contact-form-card{padding:1.6rem 1.25rem}
-  .form-grid{grid-template-columns:1fr}
-  .form-group.full{grid-column:auto}
-  .form-actions{width:100%}
-  .form-submit{width:100%;justify-content:center}
+.info-card{
+  background:#fff;
+  border-radius:22px;
+  padding:1.6rem 1.8rem;
+  display:flex;
+  align-items:center;
+  gap:1.2rem;
+  box-shadow:0 14px 35px -15px rgba(24,34,48,0.06);
+  border:1px solid rgba(24,34,48,0.05);
+  transition:transform 0.2s, box-shadow 0.2s;
+}
+.info-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 18px 40px -15px rgba(24,34,48,0.1);
+}
+.ic-icon{
+  width:52px;
+  height:52px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.3rem;
+  flex-shrink:0;
+}
+.ic-icon.teal{background:var(--teal-light);color:var(--teal)}
+.ic-icon.yellow{background:var(--yellow-light);color:var(--yellow-dark)}
+.ic-icon.coral{background:var(--coral-light);color:var(--coral)}
+
+.ic-label{
+  font-family:var(--font-heading);
+  font-size:0.75rem;
+  font-weight:700;
+  color:var(--text-muted);
+  text-transform:uppercase;
+  letter-spacing:0.06em;
+  margin-bottom:0.2rem;
+}
+.ic-val{
+  font-family:var(--font-heading);
+  font-size:1.05rem;
+  font-weight:700;
+  color:var(--text-dark);
+}
+
+.avail-box{
+  background:linear-gradient(135deg, #2B696D 0%, #1F5458 100%);
+  color:#fff;
+  border-radius:24px;
+  padding:2rem;
+  margin-top:0.6rem;
+  box-shadow:0 20px 45px -15px rgba(43,105,109,0.3);
+}
+.avail-box h4{
+  font-family:var(--font-heading);
+  font-size:1.25rem;
+  font-weight:700;
+  margin-bottom:0.5rem;
+}
+.avail-box p{
+  font-size:0.9rem;
+  opacity:0.9;
+  line-height:1.6;
+}
+
+/* Footer */
+footer{
+  background:var(--bg-sand);
+  padding:2.5rem 0;
+  border-top:1px solid rgba(24,34,48,0.08);
+  text-align:center;
+  font-size:0.85rem;
+  color:var(--text-soft);
+}
+
+@media(max-width:900px){
+  .contact-layout{grid-template-columns:1fr;gap:2.5rem}
+  .form-card{padding:2rem 1.5rem}
+  .container{padding:0 1.25rem}
 }
 </style>
 </head>
 <body>
 
-<!-- TOPBAR -->
-<div class="topbar">
-  <div class="topbar-inner">
-    <a href="index.html" class="tb-mark">
-      <span class="dot"></span>
-      <span>M. Rizwan</span>
+<header class="site-header">
+  <div class="container nav-wrap">
+    <a href="index.html" class="logo-script">Rizwan</a>
+    <a href="index.html" class="back-btn">
+      <i class="fa-solid fa-arrow-left"></i>
+      <span>Back to Portfolio</span>
     </a>
-    <div style="display:flex;align-items:center;gap:0.4rem">
-      <a href="index.html" class="tb-back-btn">
-        <i class="fa-solid fa-arrow-left"></i>
-        <span>Back to Home</span>
-      </a>
-      <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
-        <i class="fa-solid fa-moon"></i>
-        <i class="fa-solid fa-sun"></i>
-      </button>
-    </div>
   </div>
-</div>
+</header>
 
-<!-- HERO -->
 <div class="contact-hero">
-  <div class="eyebrow">Get In Touch</div>
-  <h1 class="contact-hero-title">Let's Talk <em>APEX.</em></h1>
-  <p class="contact-hero-lede">
-    Have a project, need enterprise ERP architecture, or custom workflow automation? Send a message below and I'll get back to you directly.
-  </p>
+  <div class="container">
+    <h1>Let’s make something <span>amazing.</span></h1>
+    <p>Have an Oracle APEX ERP project, workflow challenge, or batch reporting requirement? Reach out directly or submit your inquiry below.</p>
+  </div>
 </div>
 
-<!-- CONTACT SECTION -->
-<section id="contactSection">
-  <div class="contact-layout">
+<div class="container contact-layout">
+  <!-- FORM -->
+  <div class="form-card">
+    <h3>Start a Conversation</h3>
+    <p>Fill in your project outline and I'll respond within 24 hours.</p>
 
-    <!-- FORM CARD -->
-    <div class="contact-form-card">
-      <form id="contactForm" onsubmit="handleContact(event)">
-        <div class="form-grid">
-          <div class="form-group">
-            <label for="name">Full Name <span class="required">*</span></label>
-            <input id="name" type="text" placeholder="John Doe" required>
-          </div>
-
-          <div class="form-group">
-            <label for="email">Email Address <span class="required">*</span></label>
-            <input id="email" type="email" placeholder="john@company.com" required>
-          </div>
-
-          <div class="form-group">
-            <label for="phone">Phone / WhatsApp</label>
-            <input id="phone" type="tel" placeholder="+1 234 567 890">
-          </div>
-
-          <div class="form-group">
-            <label for="subject">Subject <span class="required">*</span></label>
-            <input id="subject" type="text" placeholder="ERP Project / APEX Consultation" required>
-          </div>
-
-          <div class="form-group full">
-            <label for="message">Message <span class="required">*</span></label>
-            <textarea id="message" placeholder="Describe your system requirements, timeline, and goals..." required></textarea>
-          </div>
-        </div>
-
-        <div class="form-actions">
-          <button type="submit" class="form-submit" id="submitBtn">
-            <span>Send Message</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
-
-        <div id="statusBox" class="form-status success">
-          &#10003; Inquiry prepared! Your default mail client has opened. You can also contact me directly at rimalik162534@gmail.com.
-        </div>
-
-        <div class="privacy-note">Your information is kept strictly confidential and used only to respond to your inquiry.</div>
-      </form>
-    </div>
-
-    <!-- SIDE INFO -->
-    <div class="contact-side">
-      <div class="contact-side-card">
-        <div class="contact-side-title">Prefer a direct line?</div>
-        <div class="contact-side-sub">Email, WhatsApp, or LinkedIn — whichever is fastest for you.</div>
-        <div class="contact-side-links">
-          <a href="mailto:rimalik162534@gmail.com" class="contact-pill"><i class="fa-solid fa-envelope"></i> rimalik162534@gmail.com</a>
-          <a href="https://wa.me/923237004270" target="_blank" class="contact-pill"><i class="fa-brands fa-whatsapp"></i> +92 323 700 4270</a>
-          <a href="https://linkedin.com/in/rizwan0626" target="_blank" class="contact-pill green"><i class="fa-brands fa-linkedin-in"></i> LinkedIn Profile</a>
-          <a href="https://www.upwork.com" target="_blank" class="contact-pill"><i class="fa-solid fa-briefcase"></i> Upwork</a>
-          <a href="https://www.fiverr.com" target="_blank" class="contact-pill"><i class="fa-solid fa-gem"></i> Fiverr</a>
-        </div>
+    <form class="contact-form" onsubmit="handleContact(event)">
+      <div class="form-group">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" class="form-input" placeholder="e.g. John Doe" required>
       </div>
 
-      <div class="contact-side-note">
-        <div class="label">Response Time</div>
-        <p>Messages are usually answered within 24 hours. For urgent project discussions, WhatsApp is fastest.</p>
+      <div class="form-group">
+        <label for="email">Your Email</label>
+        <input type="email" id="email" class="form-input" placeholder="e.g. john@company.com" required>
       </div>
-    </div>
 
+      <div class="form-group">
+        <label for="phone">Phone / WhatsApp (Optional)</label>
+        <input type="tel" id="phone" class="form-input" placeholder="+1 234 567 890">
+      </div>
+
+      <div class="form-group">
+        <label for="message">Project Scope &amp; Details</label>
+        <textarea id="message" class="form-textarea" placeholder="Tell me about your ERP needs, timeline, and goals..." required></textarea>
+      </div>
+
+      <button type="submit" class="btn-submit">
+        <span>Send Inquiry</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+
+      <div class="form-success-box" id="successBox">
+        &#10003; Inquiry prepared! Your default mail client has opened. You can also email directly at rimalik162534@gmail.com.
+      </div>
+    </form>
   </div>
-</section>
 
-<!-- FOOTER -->
+  <!-- DIRECT CONTACT INFO -->
+  <div class="info-cards">
+    <a href="mailto:rimalik162534@gmail.com" class="info-card">
+      <div class="ic-icon coral"><i class="fa-solid fa-envelope"></i></div>
+      <div>
+        <div class="ic-label">Direct Email</div>
+        <div class="ic-val">rimalik162534@gmail.com</div>
+      </div>
+    </a>
+
+    <a href="https://wa.me/923237004270" target="_blank" class="info-card">
+      <div class="ic-icon teal"><i class="fa-brands fa-whatsapp"></i></div>
+      <div>
+        <div class="ic-label">WhatsApp (Chat &amp; Call)</div>
+        <div class="ic-val">+92 323 700 4270</div>
+      </div>
+    </a>
+
+    <a href="https://linkedin.com/in/rizwan0626" target="_blank" class="info-card">
+      <div class="ic-icon yellow"><i class="fa-brands fa-linkedin-in"></i></div>
+      <div>
+        <div class="ic-label">LinkedIn Profile</div>
+        <div class="ic-val">linkedin.com/in/rizwan0626</div>
+      </div>
+    </a>
+
+    <div class="avail-box">
+      <h4>Availability Status</h4>
+      <p>Currently accepting enterprise Oracle APEX consulting, full-stack ERP architecture, and high-performance workflow contracts worldwide.</p>
+    </div>
+  </div>
+</div>
+
 <footer>
-  <div>&copy; <span id="yr"></span> Muhammad Rizwan &middot; Oracle APEX Developer &middot; <a href="index.html">Back to Home</a></div>
+  <div class="container">
+    &copy; 2026 Muhammad Rizwan &middot; Oracle APEX Developer &middot; <a href="index.html" style="text-decoration:underline;">Back to Home</a>
+  </div>
 </footer>
 
 <script>
-document.getElementById('yr').textContent = new Date().getFullYear();
-
-// THEME TOGGLE
-const themeToggleBtn = document.querySelector('.theme-toggle');
-if(themeToggleBtn){
-  themeToggleBtn.addEventListener('click', () => {
-    const cur = document.documentElement.getAttribute('data-theme') || 'light';
-    const next = cur === 'dark' ? 'light' : 'dark';
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-  });
-}
-
 function handleContact(e){
   e.preventDefault();
   const name = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
   const phone = document.getElementById('phone').value.trim();
-  const subject = document.getElementById('subject').value.trim();
   const message = document.getElementById('message').value.trim();
 
-  if(!name || !email || !subject || !message){
+  if(!name || !email || !message){
     alert('Please fill in all required fields.');
     return;
   }
 
-  const mailSubject = encodeURIComponent(`Oracle APEX Inquiry [${subject}] from ${name}`);
-  const mailBody = encodeURIComponent(
+  const subject = encodeURIComponent(`Oracle APEX Inquiry from ${name}`);
+  const body = encodeURIComponent(
     `Name: ${name}\n` +
     `Email: ${email}\n` +
     (phone ? `Phone: ${phone}\n` : '') +
-    `Subject: ${subject}\n\n` +
-    `Message:\n${message}`
+    `\nProject Details:\n${message}`
   );
 
-  window.location.href = `mailto:rimalik162534@gmail.com?subject=${mailSubject}&body=${mailBody}`;
-  document.getElementById('statusBox').style.display = 'block';
+  window.location.href = `mailto:rimalik162534@gmail.com?subject=${subject}&body=${body}`;
+  document.getElementById('successBox').style.display = 'block';
 }
 </script>
 
