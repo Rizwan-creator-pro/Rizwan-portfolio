@@ -4,39 +4,34 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>Contact — Muhammad Rizwan | Oracle APEX Developer</title>
-<meta name="description" content="Contact Muhammad Rizwan for enterprise Oracle APEX development, ERP architecture, and workflow automation.">
+<meta name="description" content="Get in touch with Muhammad Rizwan for enterprise Oracle APEX development, ERP architecture, and workflow automation.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
 :root{
-  --bg-cream:#FAF6F0;
-  --bg-sand:#F7F2ED;
+  --yellow:#FFE600;
+  --yellow-glow:rgba(255, 230, 0, 0.42);
+  --dark:#111111;
+  --bg-page:#FAF9F6;
   --bg-white:#FFFFFF;
-  --text-dark:#182230;
-  --text-soft:#647082;
-  --text-muted:#94A3B8;
-  --teal:#2B696D;
-  --teal-dark:#1F5458;
-  --teal-light:#EBF3F3;
-  --yellow:#F5B738;
-  --coral:#E85D4E;
-  --coral-dark:#D34636;
-  --coral-light:#FDF0EE;
-  --border:rgba(24,34,48,0.09);
+  --bg-card:#F6F5F2;
+  --text-dark:#111111;
+  --text-soft:#5E5E62;
+  --text-muted:#8E8E93;
+  --border:rgba(17,17,17,0.08);
   --font-logo:'Caveat',cursive;
-  --font-heading:'Outfit',sans-serif;
-  --font-body:'Plus Jakarta Sans',sans-serif;
+  --font-main:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
 }
 
 html{scroll-behavior:smooth}
 body{
-  background-color:var(--bg-cream);
+  background-color:var(--bg-page);
   color:var(--text-dark);
-  font-family:var(--font-body);
+  font-family:var(--font-main);
   font-size:16px;
   line-height:1.6;
   overflow-x:hidden;
@@ -45,14 +40,14 @@ body{
 a{color:inherit;text-decoration:none}
 
 .container{
-  max-width:1180px;
+  max-width:1100px;
   margin:0 auto;
   padding:0 2rem;
 }
 
 /* Header */
 .site-header{
-  padding:2rem 0 1.5rem;
+  padding:1.8rem 0 1rem;
 }
 .nav-wrap{
   display:flex;
@@ -67,14 +62,14 @@ a{color:inherit;text-decoration:none}
   line-height:1;
 }
 .back-btn{
-  font-family:var(--font-heading);
-  font-size:0.88rem;
+  font-family:var(--font-main);
+  font-size:0.86rem;
   font-weight:700;
   color:var(--text-dark);
   display:inline-flex;
   align-items:center;
   gap:0.5rem;
-  padding:0.5rem 1.2rem;
+  padding:0.5rem 1.25rem;
   border:1.5px solid var(--text-dark);
   border-radius:999px;
   transition:background 0.2s, color 0.2s;
@@ -86,26 +81,33 @@ a{color:inherit;text-decoration:none}
 
 /* Hero */
 .contact-hero{
-  padding:3rem 0 2rem;
+  padding:3.5rem 0 2rem;
   text-align:center;
 }
-.contact-hero h1{
-  font-family:var(--font-heading);
-  font-size:clamp(2.4rem, 5vw, 3.8rem);
+.contact-tag{
+  font-family:var(--font-main);
+  font-size:0.75rem;
   font-weight:800;
-  letter-spacing:-0.025em;
-  line-height:1.1;
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  color:var(--text-muted);
+  margin-bottom:0.8rem;
+}
+.contact-hero h1{
+  font-family:var(--font-main);
+  font-size:clamp(2.6rem, 5.5vw, 4.2rem);
+  font-weight:800;
+  letter-spacing:-0.03em;
+  line-height:1.05;
   color:var(--text-dark);
   margin-bottom:1rem;
-}
-.contact-hero h1 span{
-  color:var(--coral);
 }
 .contact-hero p{
   font-size:1.05rem;
   color:var(--text-soft);
-  max-width:520px;
+  max-width:540px;
   margin:0 auto;
+  line-height:1.7;
 }
 
 /* Layout */
@@ -120,13 +122,13 @@ a{color:inherit;text-decoration:none}
 /* Form Card */
 .form-card{
   background:#fff;
-  border-radius:28px;
-  padding:2.5rem 2.8rem;
-  box-shadow:0 18px 45px -15px rgba(24,34,48,0.08);
-  border:1px solid rgba(24,34,48,0.06);
+  border-radius:32px;
+  padding:2.8rem;
+  box-shadow:0 18px 45px -15px rgba(0,0,0,0.06);
+  border:1px solid var(--border);
 }
 .form-card h3{
-  font-family:var(--font-heading);
+  font-family:var(--font-main);
   font-size:1.5rem;
   font-weight:800;
   margin-bottom:0.4rem;
@@ -134,7 +136,7 @@ a{color:inherit;text-decoration:none}
 .form-card p{
   font-size:0.9rem;
   color:var(--text-soft);
-  margin-bottom:1.8rem;
+  margin-bottom:2rem;
 }
 
 .contact-form{
@@ -148,27 +150,27 @@ a{color:inherit;text-decoration:none}
   gap:0.4rem;
 }
 .form-group label{
-  font-family:var(--font-heading);
-  font-size:0.8rem;
-  font-weight:700;
+  font-family:var(--font-main);
+  font-size:0.78rem;
+  font-weight:800;
   color:var(--text-dark);
   text-transform:uppercase;
   letter-spacing:0.04em;
 }
 .form-input, .form-textarea{
   width:100%;
-  font-family:var(--font-body);
+  font-family:var(--font-main);
   font-size:0.95rem;
   color:var(--text-dark);
-  background:var(--bg-cream);
-  border:1.5px solid rgba(24,34,48,0.1);
+  background:var(--bg-card);
+  border:1px solid var(--border);
   border-radius:14px;
-  padding:0.9rem 1.1rem;
+  padding:0.95rem 1.1rem;
   outline:none;
   transition:border-color 0.2s, background 0.2s;
 }
 .form-input:focus, .form-textarea:focus{
-  border-color:var(--teal);
+  border-color:var(--text-dark);
   background:#fff;
 }
 .form-textarea{
@@ -176,41 +178,43 @@ a{color:inherit;text-decoration:none}
   resize:vertical;
 }
 .btn-submit{
-  font-family:var(--font-heading);
+  font-family:var(--font-main);
   font-size:0.95rem;
-  font-weight:700;
-  color:#fff;
-  background:var(--teal);
+  font-weight:800;
+  color:#111;
+  background:var(--yellow);
   border:none;
   border-radius:999px;
-  padding:1rem 2rem;
+  padding:1rem 2.2rem;
   cursor:pointer;
   display:inline-flex;
   align-items:center;
   justify-content:center;
   gap:0.6rem;
-  transition:background 0.2s, transform 0.15s;
+  transition:transform 0.15s, background 0.2s;
   margin-top:0.6rem;
+  text-transform:uppercase;
+  letter-spacing:0.04em;
 }
 .btn-submit:hover{
-  background:var(--teal-dark);
+  background:#000;
+  color:#fff;
   transform:translateY(-1px);
 }
 .form-success-box{
   display:none;
-  background:var(--teal-light);
-  border:1px solid var(--teal);
-  color:var(--teal-dark);
-  font-family:var(--font-heading);
-  font-weight:600;
+  background:var(--yellow);
+  color:var(--dark);
+  font-family:var(--font-main);
+  font-weight:700;
   font-size:0.92rem;
   padding:1rem;
-  border-radius:12px;
+  border-radius:14px;
   text-align:center;
   margin-top:1rem;
 }
 
-/* Info Side */
+/* Side Info */
 .info-cards{
   display:flex;
   flex-direction:column;
@@ -218,74 +222,69 @@ a{color:inherit;text-decoration:none}
 }
 .info-card{
   background:#fff;
-  border-radius:22px;
-  padding:1.6rem 1.8rem;
+  border-radius:24px;
+  padding:1.8rem;
   display:flex;
   align-items:center;
   gap:1.2rem;
-  box-shadow:0 14px 35px -15px rgba(24,34,48,0.06);
-  border:1px solid rgba(24,34,48,0.05);
-  transition:transform 0.2s, box-shadow 0.2s;
+  box-shadow:0 14px 35px -15px rgba(0,0,0,0.05);
+  border:1px solid var(--border);
+  transition:transform 0.2s;
 }
 .info-card:hover{
   transform:translateY(-2px);
-  box-shadow:0 18px 40px -15px rgba(24,34,48,0.1);
 }
 .ic-icon{
-  width:52px;
-  height:52px;
-  border-radius:50%;
+  width:50px;
+  height:50px;
+  border-radius:14px;
+  background:var(--yellow);
+  color:var(--dark);
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:1.3rem;
   flex-shrink:0;
 }
-.ic-icon.teal{background:var(--teal-light);color:var(--teal)}
-.ic-icon.yellow{background:var(--yellow-light);color:var(--yellow-dark)}
-.ic-icon.coral{background:var(--coral-light);color:var(--coral)}
-
 .ic-label{
-  font-family:var(--font-heading);
+  font-family:var(--font-main);
   font-size:0.75rem;
-  font-weight:700;
+  font-weight:800;
   color:var(--text-muted);
   text-transform:uppercase;
   letter-spacing:0.06em;
-  margin-bottom:0.2rem;
+  margin-bottom:0.25rem;
 }
 .ic-val{
-  font-family:var(--font-heading);
+  font-family:var(--font-main);
   font-size:1.05rem;
-  font-weight:700;
+  font-weight:800;
   color:var(--text-dark);
 }
 
-.avail-box{
-  background:linear-gradient(135deg, #2B696D 0%, #1F5458 100%);
+.avail-card{
+  background:var(--dark);
   color:#fff;
-  border-radius:24px;
-  padding:2rem;
+  border-radius:28px;
+  padding:2.2rem;
   margin-top:0.6rem;
-  box-shadow:0 20px 45px -15px rgba(43,105,109,0.3);
 }
-.avail-box h4{
-  font-family:var(--font-heading);
-  font-size:1.25rem;
-  font-weight:700;
-  margin-bottom:0.5rem;
+.avail-card h4{
+  font-family:var(--font-main);
+  font-size:1.3rem;
+  font-weight:800;
+  margin-bottom:0.6rem;
 }
-.avail-box p{
+.avail-card p{
   font-size:0.9rem;
-  opacity:0.9;
-  line-height:1.6;
+  color:rgba(255,255,255,0.7);
+  line-height:1.65;
 }
 
-/* Footer */
 footer{
-  background:var(--bg-sand);
+  background:var(--bg-page);
   padding:2.5rem 0;
-  border-top:1px solid rgba(24,34,48,0.08);
+  border-top:1px solid var(--border);
   text-align:center;
   font-size:0.85rem;
   color:var(--text-soft);
@@ -305,23 +304,23 @@ footer{
     <a href="index.html" class="logo-script">Rizwan</a>
     <a href="index.html" class="back-btn">
       <i class="fa-solid fa-arrow-left"></i>
-      <span>Back to Portfolio</span>
+      <span>Back to Home</span>
     </a>
   </div>
 </header>
 
 <div class="contact-hero">
   <div class="container">
-    <h1>Let’s make something <span>amazing.</span></h1>
-    <p>Have an Oracle APEX ERP project, workflow challenge, or batch reporting requirement? Reach out directly or submit your inquiry below.</p>
+    <div class="contact-tag">START A PROJECT</div>
+    <h1>Let’s Whip Up<br>Something Exceptional!</h1>
+    <p>Have an Oracle APEX ERP project, approval workflow requirement, or batch PDF engine challenge? Reach out directly or send a message below.</p>
   </div>
 </div>
 
 <div class="container contact-layout">
-  <!-- FORM -->
   <div class="form-card">
     <h3>Start a Conversation</h3>
-    <p>Fill in your project outline and I'll respond within 24 hours.</p>
+    <p>Fill in your project details and I will get back to you within 24 hours.</p>
 
     <form class="contact-form" onsubmit="handleContact(event)">
       <div class="form-group">
@@ -340,8 +339,8 @@ footer{
       </div>
 
       <div class="form-group">
-        <label for="message">Project Scope &amp; Details</label>
-        <textarea id="message" class="form-textarea" placeholder="Tell me about your ERP needs, timeline, and goals..." required></textarea>
+        <label for="message">Project Scope &amp; Requirements</label>
+        <textarea id="message" class="form-textarea" placeholder="Describe your ERP needs, timeline, and goals..." required></textarea>
       </div>
 
       <button type="submit" class="btn-submit">
@@ -350,15 +349,14 @@ footer{
       </button>
 
       <div class="form-success-box" id="successBox">
-        &#10003; Inquiry prepared! Your default mail client has opened. You can also email directly at rimalik162534@gmail.com.
+        &#10003; Inquiry prepared! Your default mail client has opened. You can also reach out directly at rimalik162534@gmail.com.
       </div>
     </form>
   </div>
 
-  <!-- DIRECT CONTACT INFO -->
   <div class="info-cards">
     <a href="mailto:rimalik162534@gmail.com" class="info-card">
-      <div class="ic-icon coral"><i class="fa-solid fa-envelope"></i></div>
+      <div class="ic-icon"><i class="fa-solid fa-envelope"></i></div>
       <div>
         <div class="ic-label">Direct Email</div>
         <div class="ic-val">rimalik162534@gmail.com</div>
@@ -366,22 +364,22 @@ footer{
     </a>
 
     <a href="https://wa.me/923237004270" target="_blank" class="info-card">
-      <div class="ic-icon teal"><i class="fa-brands fa-whatsapp"></i></div>
+      <div class="ic-icon"><i class="fa-brands fa-whatsapp"></i></div>
       <div>
         <div class="ic-label">WhatsApp (Chat &amp; Call)</div>
-        <div class="ic-val">+92 323 700 4270</div>
+        <div class="ic-val">+92 (323) 700 4270</div>
       </div>
     </a>
 
     <a href="https://linkedin.com/in/rizwan0626" target="_blank" class="info-card">
-      <div class="ic-icon yellow"><i class="fa-brands fa-linkedin-in"></i></div>
+      <div class="ic-icon"><i class="fa-brands fa-linkedin-in"></i></div>
       <div>
         <div class="ic-label">LinkedIn Profile</div>
         <div class="ic-val">linkedin.com/in/rizwan0626</div>
       </div>
     </a>
 
-    <div class="avail-box">
+    <div class="avail-card">
       <h4>Availability Status</h4>
       <p>Currently accepting enterprise Oracle APEX consulting, full-stack ERP architecture, and high-performance workflow contracts worldwide.</p>
     </div>
