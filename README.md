@@ -71,6 +71,8 @@ modern-portfolio/
     |-- TopLeftImg.tsx
     |-- Transition.tsx
     |-- WorkSlider.tsx
+  |- images/
+    |-- erp/
   |- lib/
     |-- contact.ts
   |- public/
@@ -79,8 +81,11 @@ modern-portfolio/
   |- .gitignore
   |- environment.d.ts
   |- eslint.config.mjs
+  |- GIT HUB PUSH AND PULL PROCESS CODE.txt
+  |- index2.html
   |- netlify.toml
   |- next.config.ts
+  |- package-lock.json
   |- package.json
   |- pnpm-lock.yaml
   |- pnpm-workspace.yaml
