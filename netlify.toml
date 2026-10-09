@@ -1,3 +1,40 @@
+# ========================================================
+# 🤖 Enterprise AI Hub (Render Proxy)
+# Must be placed BEFORE any generic catch-all rules!
+# ========================================================
+[[redirects]]
+  from = "/ai"
+  to = "https://enterprise-ai-6lku.onrender.com/"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/ai/"
+  to = "https://enterprise-ai-6lku.onrender.com/"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/ai/*"
+  to = "https://enterprise-ai-6lku.onrender.com/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://enterprise-ai-6lku.onrender.com/api/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/static/*"
+  to = "https://enterprise-ai-6lku.onrender.com/static/:splat"
+  status = 200
+  force = true
+
+# ========================================================
+# 🏛️ Existing Project Redirects (Gym, POS, ERP, etc.)
+# ========================================================
 [[redirects]]
   from = "/gym/*"
   to = "https://oracleapex.com/ords/r/medimatrics/royal-gym/:splat"
@@ -7,18 +44,6 @@
 [[redirects]]
   from = "/gym"
   to = "https://oracleapex.com/ords/r/medimatrics/royal-gym/login"
-  status = 200
-  force = true
-  
-[[redirects]]
-  from = "/ai/*"
-  to = "https://enterprise-ai-6lku.onrender.com/:splat"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/ai"
-  to = "https://enterprise-ai-6lku.onrender.com"
   status = 200
   force = true
 
@@ -95,27 +120,21 @@
   force = true
 
 [functions]
-
   [functions.emails]
   included_files = [
     "./emails/**"
   ]
 
 [context]
-
   [context.production]
-
     [context.production.functions]
-
       [context.production.functions.emails]
       included_files = [
         "./emails/**"
       ]
 
   [context.main]
-
     [context.main.functions]
-
       [context.main.functions.emails]
       included_files = [
         "./emails/**"
