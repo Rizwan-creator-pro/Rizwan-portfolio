@@ -9,6 +9,18 @@
   to = "https://oracleapex.com/ords/r/medimatrics/royal-gym/login"
   status = 200
   force = true
+  
+[[redirects]]
+  from = "/ai/*"
+  to = "https://enterprise-ai-6lku.onrender.com/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/ai"
+  to = "https://enterprise-ai-6lku.onrender.com"
+  status = 200
+  force = true
 
 [[redirects]]
   from = "/pos/*"
